@@ -1,0 +1,5 @@
+
+const SELECTED_NAVIGATION_OPTION = 'active_navopt'
+const SELECTED_MOVIE_VIEW = 'active_movie_view'
+
+export {SELECTED_NAVIGATION_OPTION, SELECTED_MOVIE_VIEW}
