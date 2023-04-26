@@ -8,7 +8,7 @@
   </mat-button-toggle-group>
 
   <div class="grid-container">
-    <mat-grid-list cols="4" rowHeight="500px" gutterSize="10px" *ngIf="!isListView()">
+    <mat-grid-list [cols]="columnAmount" rowHeight="500px" gutterSize="10px" *ngIf="!isListView()">
       <mat-grid-tile *ngFor="let m of movieService.getMovies()">
         <mat-card fxLayout="column" class="movie-card">
           <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"></div>

@@ -1,0 +1,22 @@
+.navbar {
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  .navbar-opt {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    transition: .3s all;
+
+    &:hover {
+      background-color: darkblue;
+    }
+  }
+
+  .navbar-opt-toggled {
+    background-color: grey;
+  }
+
+}
