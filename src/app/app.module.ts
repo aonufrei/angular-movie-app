@@ -21,10 +21,13 @@ import {IncomePipe} from "./income.pipe";
 import {MatListModule} from "@angular/material/list";
 import {MoviePresenterComponent} from './movie-presenter/movie-presenter.component';
 import {MatIconModule} from "@angular/material/icon";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {CreateMovieDialogComponent} from './create-movie-dialog/create-movie-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     NotFoundComponent,
     MoviePresenterComponent,
     CreateMovieDialogComponent,
+    RegisterDialogComponent,
+    LoginDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatDialogModule,
     MatListModule,
     MatIconModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     MatInputModule,
   ],

@@ -1,0 +1,42 @@
+<div class="dialog-container">
+
+  <h3 class="dialog-title">Sign Up</h3>
+
+  <form fxLayout="column" fxFill
+        [formGroup]="form" (ngSubmit)="register()">
+
+    <mat-form-field appearance="fill" floatLabel="auto">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput
+             [type]="hidePassword ? 'password' : 'text'">
+      <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm password</mat-label>
+      <input formControlName="confirmPassword" matInput
+             [type]="hideConfirmPassword ? 'password' : 'text'">
+      <button type="button" mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hideConfirmPassword">
+        <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <a (click)="goToLogin()" class="dialog-link">Already are registered? Press to login</a>
+    <button mat-raised-button color="primary" type="submit"
+            [disabled]="form.invalid">
+      Register
+    </button>
+  </form>
+</div>

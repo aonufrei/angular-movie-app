@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {createNavbarOption, NavbarOption} from "./common/NavbarOption";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {UserPropertiesService} from "./services/user-properties.service";
+import {SELECTED_NAVIGATION_OPTION} from "./common/UserPropertiesConstants";
 
 @Component({
   selector: 'app-root',
@@ -15,16 +16,17 @@ export class AppComponent implements OnInit {
     createNavbarOption(2, "Favorites", '/favorites'),
   ]
 
-  navStorageName = 'active_navopt'
+  showAddMovieBtn: boolean = false
 
   constructor(private router: Router, private userProperties: UserPropertiesService) {
   }
 
   onNavOptionClicked(id: number) {
-    localStorage.setItem(this.navStorageName, id.toString())
+    localStorage.setItem(SELECTED_NAVIGATION_OPTION, id.toString())
   }
 
   selectNavOption(id: number) {
+    this.showAddMovieBtn = id === this.navOptions[0].id
     this.navOptions.forEach(opt => opt.selected = opt.id === id)
     this.userProperties.setSelectedNavigationOption(id)
   }

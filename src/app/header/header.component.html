@@ -1,10 +1,18 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" fxLayoutAlign="space-between center">
+  <div fxLayoutAlign="start center">
   <span>Movie App</span>
   <nav class="navbar">
     <a *ngFor="let opt of navOptions;" [ngClass]="opt.selected ? 'navbar-opt navbar-opt-toggled' : 'navbar-opt'"
        [routerLink]="opt.routingUrl" (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
   </nav>
-  <span>
+  <span *ngIf="showAddMovieBtn">
     <button mat-raised-button (click)="openAddMovieDialog()">Add Movie</button>
   </span>
+  </div>
+  <div fxLayoutAlign="space-between center">
+    <a class="header-user-name">{{authService.currentUser.username}}</a>
+    <button class="header-user-action" mat-icon-button color="warn" (click)="authenticated ? logout() : showLogin()">
+      <mat-icon>{{authenticated ? 'logout' : 'login'}}</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

@@ -1,9 +1,8 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {UserPropertiesService} from "../services/user-properties.service";
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {Like} from '../common/Likes'
 import {MovieService} from "../services/movie.service";
 import {LikeService} from "../services/like.service";
 

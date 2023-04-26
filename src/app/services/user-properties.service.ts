@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {
   SELECTED_MOVIE_VIEW,
-  SELECTED_MOVIE_VIEW_FAVORITE, SELECTED_MOVIE_VIEW_REGULAR,
-  SELECTED_NAVIGATION_OPTION
+  SELECTED_MOVIE_VIEW_FAVORITE,
+  SELECTED_MOVIE_VIEW_REGULAR,
+  SELECTED_NAVIGATION_OPTION,
 } from "../common/UserPropertiesConstants";
+import {GUEST_USER, User} from "../common/User";
 
 @Injectable({
   providedIn: 'root'

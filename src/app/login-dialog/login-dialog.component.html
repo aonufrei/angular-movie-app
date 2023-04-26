@@ -1,0 +1,31 @@
+<div class="dialog-container">
+
+  <h3 class="dialog-title">Sign In</h3>
+
+  <form fxLayout="column" fxFill
+        [formGroup]="form" (ngSubmit)="login()">
+
+    <mat-form-field appearance="fill" floatLabel="auto">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput
+             [type]="hidePassword ? 'password' : 'text'">
+      <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <a (click)="goToRegister()" class="dialog-link">No account, press to register</a>
+    <button mat-raised-button color="primary" type="submit"
+            [disabled]="form.invalid">
+      Login
+    </button>
+  </form>
+</div>
