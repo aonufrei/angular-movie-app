@@ -2,7 +2,8 @@
 
   <app-movie-presenter [movies]="movieService.getMoviesForUser(1)" [moviesView]="moviesView"
                        [columnAmount]="columnAmount"
-                       (viewChangedEvent)="onViewOptionChanged($event)" (movieLikedEvent)="onMovieLikedOrDislike($event)">
+                       (viewChangedEvent)="onViewOptionChanged($event)"
+                       (movieLikedEvent)="onMovieLikedOrDislike($event)">
   </app-movie-presenter>
 
 </section>

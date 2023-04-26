@@ -1,7 +1,9 @@
 <section class="movie-section">
 
-  <app-movie-presenter [movies]="movieService.getUserFavoriteMovies(1)" [moviesView]="moviesView" [columnAmount]="columnAmount"
-                       (viewChangedEvent)="onViewOptionChanged($event)" (movieLikedEvent)="onMovieLikedOrDislike($event)"></app-movie-presenter>
+  <app-movie-presenter [movies]="movieService.getUserFavoriteMovies(1)" [moviesView]="moviesView"
+                       [columnAmount]="columnAmount"
+                       (viewChangedEvent)="onViewOptionChanged($event)"
+                       (movieLikedEvent)="onMovieLikedOrDislike($event)"></app-movie-presenter>
 
 </section>
 

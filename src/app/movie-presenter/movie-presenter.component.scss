@@ -1,0 +1,92 @@
+.change-movie-view {
+  margin-bottom: 20px;
+}
+
+.grid-container {
+
+  .movie-card {
+    height: 100%;
+    width: 350px;
+    background-color: aquamarine;
+
+    .image-bearer {
+      height: 400px;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: black;
+    }
+
+    .movie-card-info {
+      padding: 5px 20px;
+    }
+
+    .movie-card-title {
+      display: block;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    .movie-card-year {
+      display: block;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .movie-card-income {
+      font-size: 1em;
+    }
+
+    .movie-card-createdAt {
+      font-size: 1em;
+    }
+  }
+
+  .movie-list-card-item {
+    height: 100%;
+    width: 100%;
+    background-color: aquamarine;
+
+    .image-bearer {
+      width: 300px;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: black;
+    }
+
+    .movie-list-card-information {
+      padding: 10px 20px;
+
+      .movie-card-title {
+        display: block;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+
+      .movie-card-year {
+        display: block;
+        font-size: 1em;
+        margin-bottom: 10px;
+      }
+
+      .movie-card-income {
+        font-size: 1em;
+      }
+
+      .movie-card-createdAt {
+        font-size: 1em;
+      }
+    }
+
+
+  }
+
+  .card-image {
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+}
