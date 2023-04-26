@@ -9,17 +9,25 @@
   <mat-grid-list [cols]="columnAmount" rowHeight="500px" gutterSize="10px" *ngIf="!isListView()">
     <mat-grid-tile *ngFor="let m of movies">
       <mat-card fxLayout="column" class="movie-card">
-        <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"></div>
+        <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"
+             fxLayoutAlign="end start">>
+          <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="warn"
+                  (click)="onMovieDelete(m.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="space-between" class="movie-card-info">
           <div>
-            <span class="movie-card-title">{{m.name}}</span>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <span class="movie-card-title">{{m.name}}</span>
+              <button mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
+                <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
+              </button>
+            </div>
             <span class="movie-card-year">{{m.year}}</span>
           </div>
           <div fxLayoutAlign="space-between" fxLayout="center">
             <span class="movie-card-income">{{m.income | income }}</span>
-            <button mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
-              <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
-            </button>
             <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
           </div>
         </div>
@@ -34,12 +42,23 @@
         <div class="movie-list-card-information" fxLayout="column" fxFlexAlign="space-between" [style.width]="'100%'"
              [style.height]="'100%'">
           <div fxFlex="30%">
-            <span class="movie-card-title">{{m.name}}</span>
+            <div fxLayoutAlign="space-between center">
+              <span class="movie-card-title">{{m.name}}</span>
+              <button mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
+                <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
+              </button>
+            </div>
             <span class="movie-card-year">{{m.year}}</span>
             <span class="movie-card-income">{{m.income | income }}</span>
           </div>
           <div fxFlex="70%" fxLayout="row" fxLayoutAlign="end end">
-            <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
+            <div fxLayoutAlign="space-around center">
+              <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
+              <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="warn"
+                      (click)="onMovieDelete(m.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
 

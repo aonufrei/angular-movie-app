@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Movie} from "../common/Movies";
+import {Movie, MovieForm} from "../common/Movies";
 import {LikeService} from "./like.service";
 
 @Injectable({
@@ -51,7 +51,16 @@ export class MovieService {
   }
 
   getMovies() {
+    // TODO: Use LocalStorage
     return [...this.movieDB]
+  }
+
+  addMovie(movie: Movie) {
+    this.movieDB = [...this.movieDB, movie]
+  }
+
+  removeMovie(movieId: number) {
+    this.movieDB = [...this.movieDB.filter(m => m.id !== movieId)]
   }
 
   getMoviesForUser(userId: number) {
@@ -64,6 +73,15 @@ export class MovieService {
     const likedMovies = this.likeService.getLikedMovies(userId)
     const moviesToShow = [...this.getMovies()];
     return moviesToShow.filter(m => likedMovies.includes(m.id)).map(m => ({...m, favorite: likedMovies.includes(m.id)}))
+  }
+
+  buildMovie(movieForm: MovieForm): Movie {
+    return {
+      id: Math.floor(Math.random() * 99999999),
+      ...movieForm,
+      favorite: false,
+      createdAt: new Date(),
+    }
   }
 
 

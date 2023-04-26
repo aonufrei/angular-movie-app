@@ -1,1 +1,32 @@
-<p>editor works!</p>
+<mat-card>
+  <form fxLayout="column" (ngSubmit)="createMovie()">
+
+    <mat-form-field appearance="fill" floatLabel="auto">
+      <mat-label>Title</mat-label>
+      <input matInput/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="auto">
+      <mat-label>Poster</mat-label>
+      <input matInput/>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" floatLabel="auto">
+      <mat-label>Income</mat-label>
+      <input matInput class="number-input" type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="auto">
+      <mat-label>Year</mat-label>
+      <input matInput class="number-input" type="number">
+    </mat-form-field>
+
+
+
+  </form>
+  <!--  name: string,-->
+  <!--  picture: string,-->
+  <!--  year: number,-->
+  <!--  income: number,-->
+</mat-card>

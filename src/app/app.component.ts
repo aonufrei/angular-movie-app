@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
   navOptions: NavbarOption[] = [
     createNavbarOption(1, "Movies", '/movies'),
     createNavbarOption(2, "Favorites", '/favorites'),
-    createNavbarOption(3, "Editor", "/editor")
   ]
 
   navStorageName = 'active_navopt'

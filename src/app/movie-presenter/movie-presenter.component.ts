@@ -13,8 +13,10 @@ export class MoviePresenterComponent {
   @Input() movies: Movie[] = []
   @Input() moviesView: string = GRID_VIEW
   @Input() columnAmount: number = 1;
+  @Input() showDelete: boolean = false
   @Output() viewChangedEvent = new EventEmitter<string>();
   @Output() movieLikedEvent = new EventEmitter<number>();
+  @Output() movieDeleteEvent = new EventEmitter<number>();
 
   constructor() {
   }
@@ -25,6 +27,10 @@ export class MoviePresenterComponent {
 
   onMovieMadeFavorite(id: number) {
     this.movieLikedEvent.emit(id)
+  }
+
+  onMovieDelete(id: number) {
+    this.movieDeleteEvent.emit(id)
   }
 
   isGridView = () => this.moviesView === GRID_VIEW

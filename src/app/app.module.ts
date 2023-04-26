@@ -12,15 +12,19 @@ import {FavMoviesPageComponent} from './fav-movies-page/fav-movies-page.componen
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
-import { EditorComponent } from './editor/editor.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import {EditorComponent} from './editor/editor.component';
+import {NotFoundComponent} from './not-found/not-found.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
 import {IncomePipe} from "./income.pipe";
 import {MatListModule} from "@angular/material/list";
-import { MoviePresenterComponent } from './movie-presenter/movie-presenter.component';
+import {MoviePresenterComponent} from './movie-presenter/movie-presenter.component';
 import {MatIconModule} from "@angular/material/icon";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
+import {CreateMovieDialogComponent} from './create-movie-dialog/create-movie-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import {MatIconModule} from "@angular/material/icon";
     EditorComponent,
     NotFoundComponent,
     MoviePresenterComponent,
+    CreateMovieDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,8 +50,11 @@ import {MatIconModule} from "@angular/material/icon";
     MatButtonToggleModule,
     MatGridListModule,
     MatCardModule,
+    MatDialogModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

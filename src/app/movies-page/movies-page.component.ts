@@ -55,11 +55,15 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
 
   onViewOptionChanged(option: string) {
     this.moviesView = option
-    this.userProperties.setSelectedMovieViewOption(option)
+    this.userProperties.setSelectedMovieViewRegular(option)
   }
 
   onMovieLikedOrDislike(id: number) {
     this.likeService.likeOrDislike({ userId: 1, movieId: id})
+  }
+
+  onMovieDelete(id: number) {
+    this.movieService.removeMovie(id)
   }
 
   ngOnDestroy() {

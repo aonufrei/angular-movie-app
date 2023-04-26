@@ -54,7 +54,7 @@ export class FavMoviesPageComponent implements OnInit, OnDestroy{
 
   onViewOptionChanged(option: string) {
     this.moviesView = option
-    this.userProperties.setSelectedMovieViewOption(option)
+    this.userProperties.setSelectedMovieViewFavorite(option)
   }
 
   onMovieLikedOrDislike(id: number) {

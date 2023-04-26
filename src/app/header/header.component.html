@@ -4,4 +4,7 @@
     <a *ngFor="let opt of navOptions;" [ngClass]="opt.selected ? 'navbar-opt navbar-opt-toggled' : 'navbar-opt'"
        [routerLink]="opt.routingUrl" (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
   </nav>
+  <span>
+    <button mat-raised-button (click)="openAddMovieDialog()">Add Movie</button>
+  </span>
 </mat-toolbar>

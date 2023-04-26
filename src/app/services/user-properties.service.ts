@@ -53,4 +53,12 @@ export class UserPropertiesService {
     localStorage.setItem(SELECTED_MOVIE_VIEW, option)
   }
 
+  setSelectedMovieViewRegular(option: string) {
+    localStorage.setItem(SELECTED_MOVIE_VIEW_REGULAR, option)
+  }
+
+  setSelectedMovieViewFavorite(option: string) {
+    localStorage.setItem(SELECTED_MOVIE_VIEW_FAVORITE, option)
+  }
+
 }

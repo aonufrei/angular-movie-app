@@ -8,10 +8,16 @@ interface Movie {
   createdAt: Date
 }
 
+interface MovieForm {
+  name: string,
+  picture: string,
+  year: number,
+  income: number,
+}
 
 const GRID_VIEW: string = 'grid'
 const LIST_VIEW: string = 'list'
 
 
 
-export {Movie, GRID_VIEW, LIST_VIEW}
+export {Movie, MovieForm, GRID_VIEW, LIST_VIEW}
