@@ -3,8 +3,9 @@ import {UserPropertiesService} from "../services/user-properties.service";
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {Movie} from "../common/Movies";
+import {Like} from '../common/Likes'
 import {MovieService} from "../services/movie.service";
+import {LikeService} from "../services/like.service";
 
 @Component({
   selector: 'app-movies-page',
@@ -13,10 +14,7 @@ import {MovieService} from "../services/movie.service";
 })
 export class MoviesPageComponent implements OnInit, OnDestroy {
 
-  gridViewValue = 'grid'
-  listViewValue = 'list'
-
-  moviesView = this.userProperties.getSelectedMovieViewOption()
+  moviesView = this.userProperties.getSelectedMovieViewOptionOnRegular()
 
   destroyed = new Subject<void>();
   columnAmount: number = 1;
@@ -31,6 +29,7 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
 
   constructor(public userProperties: UserPropertiesService,
               public movieService: MovieService,
+              public likeService: LikeService,
               private breakpointObserver: BreakpointObserver) {
     breakpointObserver
       .observe([
@@ -51,7 +50,7 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userProperties.getSelectedMovieViewOption()
+    this.moviesView = this.userProperties.getSelectedMovieViewOptionOnRegular()
   }
 
   onViewOptionChanged(option: string) {
@@ -59,9 +58,9 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
     this.userProperties.setSelectedMovieViewOption(option)
   }
 
-  isGridView = () => this.moviesView === this.gridViewValue
-
-  isListView = () => this.moviesView === this.listViewValue
+  onMovieLikedOrDislike(id: number) {
+    this.likeService.likeOrDislike({ userId: 1, movieId: id})
+  }
 
   ngOnDestroy() {
     this.destroyed.next();

@@ -4,9 +4,14 @@ interface Movie {
   picture: string,
   year: number,
   income: number,
+  favorite: boolean,
   createdAt: Date
 }
 
 
+const GRID_VIEW: string = 'grid'
+const LIST_VIEW: string = 'list'
 
-export {Movie}
+
+
+export {Movie, GRID_VIEW, LIST_VIEW}

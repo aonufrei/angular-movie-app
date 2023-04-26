@@ -1,5 +1,9 @@
 import {Injectable} from '@angular/core';
-import {SELECTED_MOVIE_VIEW, SELECTED_NAVIGATION_OPTION} from "../common/UserPropertiesConstants";
+import {
+  SELECTED_MOVIE_VIEW,
+  SELECTED_MOVIE_VIEW_FAVORITE, SELECTED_MOVIE_VIEW_REGULAR,
+  SELECTED_NAVIGATION_OPTION
+} from "../common/UserPropertiesConstants";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +33,16 @@ export class UserPropertiesService {
     localStorage.setItem(SELECTED_NAVIGATION_OPTION, id.toString())
   }
 
-  getSelectedMovieViewOption(): string {
-    const activeOption = localStorage.getItem(SELECTED_MOVIE_VIEW)
+  getSelectedMovieViewOptionOnRegular(): string {
+    return this.fetchMovieViewOption(SELECTED_MOVIE_VIEW_REGULAR)
+  }
+
+  getSelectedMovieViewOptionOnFavorites(): string {
+    return this.fetchMovieViewOption(SELECTED_MOVIE_VIEW_FAVORITE)
+  }
+
+  fetchMovieViewOption(optName: string) {
+    const activeOption = localStorage.getItem(optName)
     if (activeOption) {
       return activeOption
     }

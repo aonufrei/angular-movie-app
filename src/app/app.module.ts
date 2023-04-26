@@ -19,6 +19,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
 import {IncomePipe} from "./income.pipe";
 import {MatListModule} from "@angular/material/list";
+import { MoviePresenterComponent } from './movie-presenter/movie-presenter.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import {MatListModule} from "@angular/material/list";
     IncomePipe,
     EditorComponent,
     NotFoundComponent,
+    MoviePresenterComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import {MatListModule} from "@angular/material/list";
     MatButtonToggleModule,
     MatGridListModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

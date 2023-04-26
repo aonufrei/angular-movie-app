@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {UserPropertiesService} from "../services/user-properties.service";
@@ -11,12 +11,9 @@ import {MovieService} from "../services/movie.service";
   templateUrl: './fav-movies-page.component.html',
   styleUrls: ['./fav-movies-page.component.scss']
 })
-export class FavMoviesPageComponent {
+export class FavMoviesPageComponent implements OnInit, OnDestroy{
 
-  gridViewValue = 'grid'
-  listViewValue = 'list'
-
-  moviesView = this.userProperties.getSelectedMovieViewOption()
+  moviesView = this.userProperties.getSelectedMovieViewOptionOnFavorites()
 
   destroyed = new Subject<void>();
   columnAmount: number = 1;
@@ -30,9 +27,9 @@ export class FavMoviesPageComponent {
   ]);
 
   constructor(public userProperties: UserPropertiesService,
-              private breakpointObserver: BreakpointObserver,
               public movieService: MovieService,
-              private likeService: LikeService) {
+              public likeService: LikeService,
+              private breakpointObserver: BreakpointObserver) {
     breakpointObserver
       .observe([
         Breakpoints.XSmall,
@@ -51,19 +48,8 @@ export class FavMoviesPageComponent {
       });
   }
 
-  getUserId() {
-    return -1
-  }
-
-  getMoviesToShow(userId: number) {
-    const likes = this.likeService.getLikes(userId)
-    const movies = this.movieService.getMovies()
-    const requiredMovieIds = likes.map(l => l.movieId)
-    return movies.filter(m => requiredMovieIds.includes(m.id))
-  }
-
   ngOnInit(): void {
-    this.userProperties.getSelectedMovieViewOption()
+    this.moviesView = this.userProperties.getSelectedMovieViewOptionOnFavorites()
   }
 
   onViewOptionChanged(option: string) {
@@ -71,13 +57,15 @@ export class FavMoviesPageComponent {
     this.userProperties.setSelectedMovieViewOption(option)
   }
 
-  isGridView = () => this.moviesView === this.gridViewValue
+  onMovieLikedOrDislike(id: number) {
+    this.likeService.likeOrDislike({ userId: 1, movieId: id})
+  }
 
-  isListView = () => this.moviesView === this.listViewValue
 
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.complete();
   }
+
 
 }

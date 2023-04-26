@@ -23,11 +23,25 @@ export class LikeService {
   }
 
   getLikes(userId: number) {
-    return this.likesFromStorage().filter(l => l.userId === userId)
+    return [...this.likesFromStorage().filter(l => l.userId === userId).map(l => ({...l}))]
+  }
+
+  getLikedMovies(userId: number) {
+    return this.getLikes(userId).map(l => l.movieId)
   }
 
   isSameLike(l1: Like, l2: Like) {
     return l1.userId === l2.userId && l1.movieId === l2.movieId
+  }
+
+  likeOrDislike(like: Like) {
+    if (this.likesFromStorage().find(l => this.isSameLike(l, like))) {
+      this.removeLike(like)
+      console.log("dislike")
+      return
+    }
+    console.log("like")
+    this.addLike(like)
   }
 
   addLike(like: Like) {
@@ -39,12 +53,9 @@ export class LikeService {
   }
 
   removeLike(like: Like) {
-    const likes = this.likesFromStorage()
-    const remaining = likes.filter(l => this.isSameLike(like, l))
-    if (likes.length === remaining.length)  {
-      return
-    }
-    localStorage.setItem(LIKED_MOVIES_BY_USERS, JSON.stringify([...remaining]))
+    let likes = this.likesFromStorage()
+    likes = likes.filter(l => !this.isSameLike(l, like))
+    localStorage.setItem(LIKED_MOVIES_BY_USERS, JSON.stringify([...likes]))
   }
 
 
