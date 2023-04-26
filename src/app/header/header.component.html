@@ -1,0 +1,7 @@
+<mat-toolbar color="primary">
+  <span>Movie App</span>
+  <nav class="navbar">
+    <a *ngFor="let opt of navOptions;" [ngClass]="opt.selected ? 'navbar-opt navbar-opt-toggled' : 'navbar-opt'"
+       [routerLink]="opt.routingUrl" (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
+  </nav>
+</mat-toolbar>

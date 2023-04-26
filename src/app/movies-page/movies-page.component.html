@@ -1,0 +1,51 @@
+<section class="movie-section">
+
+  <mat-button-toggle-group class="change-movie-view" name="grid_view_select">
+    <mat-button-toggle value="grid_view" [checked]="isGridView()" (click)="onViewOptionChanged(gridViewValue)">Grid
+    </mat-button-toggle>
+    <mat-button-toggle value="list_view" [checked]="isListView()" (click)="onViewOptionChanged(listViewValue)">List
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div class="grid-container">
+    <mat-grid-list cols="4" rowHeight="500px" gutterSize="10px" *ngIf="!isListView()">
+      <mat-grid-tile *ngFor="let m of movieService.getMovies()">
+        <mat-card fxLayout="column" class="movie-card">
+          <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"></div>
+          <div fxFlex="25%" fxLayout="column" fxLayoutAlign="space-between" class="movie-card-info">
+            <div>
+              <span class="movie-card-title">{{m.name}}</span>
+              <span class="movie-card-year">{{m.year}}</span>
+            </div>
+            <div fxLayoutAlign="space-between">
+              <span class="movie-card-income">{{m.income | income }}</span>
+              <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
+            </div>
+          </div>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="1" rowHeight="300px" gutterSize="5px" *ngIf="isListView()">
+      <mat-grid-tile *ngFor="let m of movieService.getMovies()">
+        <mat-card fxLayout="row" class="movie-list-card-item">
+          <div class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"></div>
+          <div class="movie-list-card-information" fxLayout="column" fxFlexAlign="space-between" [style.width]="'100%'"
+               [style.height]="'100%'">
+            <div fxFlex="30%">
+              <span class="movie-card-title">{{m.name}}</span>
+              <span class="movie-card-year">{{m.year}}</span>
+              <span class="movie-card-income">{{m.income | income }}</span>
+            </div>
+            <div fxFlex="70%" fxLayout="row" fxLayoutAlign="end end">
+              <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
+            </div>
+          </div>
+
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </div>
+</section>
+
