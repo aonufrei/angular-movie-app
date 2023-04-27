@@ -10,10 +10,10 @@ export class AuthService {
   currentUser: User = GUEST_USER
 
   constructor() {
-    this.updateUser()
+    this.updateCurrentUser()
   }
 
-  updateUser() {
+  updateCurrentUser() {
     this.currentUser = this.getUserList().find(u => u.authenticated) || GUEST_USER
   }
 
@@ -34,22 +34,28 @@ export class AuthService {
     const success = this.users.find(u => u.username === username && u.password === password) !== undefined
     const nUsers = this.users.map(u => ({...u, authenticated: u.username === username && u.password === password}))
     localStorage.setItem(USER_LIST, JSON.stringify(nUsers))
-    this.updateUser()
+    this.updateCurrentUser()
     return success
   }
 
   logout() {
     const nUsers = this.users.map(u => ({...u, authenticated: false}))
     localStorage.setItem(USER_LIST, JSON.stringify(nUsers))
-    this.updateUser()
+    this.updateCurrentUser()
   }
 
   register(username: string, password: string, role: UserRole) {
     const user = this.buildUser(username, password, role)
-    const noGuestsUsers = this.getUserList().filter(u => u.role !== GUEST_USER.role).map(u => ({...u}))
+    const noGuestsUsers = this.users.filter(u => u.role !== GUEST_USER.role).map(u => ({...u}))
     const newUserList = [...noGuestsUsers, user]
     localStorage.setItem(USER_LIST, JSON.stringify(newUserList))
     return true
+  }
+
+  changeUserRole(userId: number, role: UserRole) {
+    const updatedUsers = this.users.map(u => ({...u, role: u.id === userId ? role : u.role}))
+    localStorage.setItem(USER_LIST, JSON.stringify(updatedUsers))
+    this.updateCurrentUser()
   }
 
   buildUser(username: string, password: string, role: UserRole): User {

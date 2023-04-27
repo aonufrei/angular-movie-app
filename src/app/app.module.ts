@@ -28,6 +28,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { UserPageComponent } from './user-page/user-page.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     CreateMovieDialogComponent,
     RegisterDialogComponent,
     LoginDialogComponent,
+    UserPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatSnackBarModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
