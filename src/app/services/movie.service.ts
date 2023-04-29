@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Movie, MovieForm} from "../common/Movies";
 import {LikeService} from "./like.service";
+import {SortMovieField, SortMovieOption, SortOrder} from "../common/ListOptions";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class MovieService {
       year: 2001,
       favorite: false,
       income: 43212341,
-      createdAt: new Date()
+      createdAt: this.createDateFromString("01 Jan 2023 00:00:00 GMT")
     },
     {
       id: 2,
@@ -24,7 +25,7 @@ export class MovieService {
       year: 2002,
       favorite: false,
       income: 53212341,
-      createdAt: new Date()
+      createdAt: this.createDateFromString("04 Jan 2023 00:00:00 GMT")
     },
     {
       id: 3,
@@ -33,7 +34,7 @@ export class MovieService {
       year: 2003,
       favorite: false,
       income: 63212341,
-      createdAt: new Date()
+      createdAt: this.createDateFromString("02 Jan 2023 00:00:00 GMT")
     },
     {
       id: 4,
@@ -42,9 +43,15 @@ export class MovieService {
       year: 2008,
       favorite: false,
       income: 300431,
-      createdAt: new Date()
+      createdAt: this.createDateFromString("02 Jan 2023 10:00:00 GMT")
     }
   ]
+
+  createDateFromString(s: string) {
+    const d = new Date()
+    d.setTime(Date.parse(s))
+    return d
+  }
 
   constructor(private likeService: LikeService) {
 
@@ -71,8 +78,17 @@ export class MovieService {
 
   getUserFavoriteMovies(userId: number) {
     const likedMovies = this.likeService.getLikedMovies(userId)
-    const moviesToShow = [...this.getMovies()];
+    const moviesToShow = this.getMovies()
     return moviesToShow.filter(m => likedMovies.includes(m.id)).map(m => ({...m, favorite: likedMovies.includes(m.id)}))
+  }
+
+  searchForMovie(movieFunc: () => Movie[], searchQuery: string, sorting: SortMovieOption): Movie[] {
+    const all = movieFunc()
+    //.sort((m1, m2) => this.compareMovies(m1, m2, sorting))
+    if (!searchQuery || searchQuery.trim() === '') {
+      return all
+    }
+    return all.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase()))
   }
 
   buildMovie(movieForm: MovieForm): Movie {
@@ -83,6 +99,5 @@ export class MovieService {
       createdAt: new Date(),
     }
   }
-
 
 }

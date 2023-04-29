@@ -10,7 +10,7 @@ import {MatSelectChange} from "@angular/material/select";
 })
 export class UserPageComponent {
 
-  users: User[] = this.authService.users
+  users: User[] = this.authService.users.filter(u => u.role !== UserRole.GUEST)
 
   constructor(public authService: AuthService) {
   }

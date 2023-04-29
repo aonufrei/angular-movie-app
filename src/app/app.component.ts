@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   selectNavOption(id: number) {
     this.showAddMovieBtn = id === this.navOptions[0].id
     this.navOptions.forEach(opt => opt.selected = opt.id === id)
-    this.userProperties.setSelectedNavigationOption(id)
+    this.userProperties.setNumberParam(SELECTED_NAVIGATION_OPTION, id)
   }
 
   ngOnInit(): void {
@@ -44,6 +44,6 @@ export class AppComponent implements OnInit {
       }
     })
 
-    this.selectNavOption(this.userProperties.getSelectedNavigationOption())
+    this.selectNavOption(this.userProperties.getNumberFromParam(SELECTED_NAVIGATION_OPTION))
   }
 }

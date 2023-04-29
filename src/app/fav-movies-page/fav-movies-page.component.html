@@ -1,9 +1,12 @@
 <section class="movie-section">
 
-  <app-movie-presenter [movies]="movieService.getUserFavoriteMovies(1)" [moviesView]="moviesView"
+  <app-movie-presenter [movies]="movies" [moviesView]="moviesView"
+                       [sortOpt]="sorting"
                        [columnAmount]="columnAmount"
                        (viewChangedEvent)="onViewOptionChanged($event)"
-                       (movieLikedEvent)="onMovieLikedOrDislike($event)"></app-movie-presenter>
+                       (movieLikedEvent)="onMovieLikedOrDislike($event)"
+                       (searchEvent)="onSearch($event)"
+                       (sortEvent)="onSortingChanged($event)"></app-movie-presenter>
 
 </section>
 

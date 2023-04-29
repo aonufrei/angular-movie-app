@@ -5,6 +5,9 @@ const LIKED_MOVIES_BY_USERS = 'liked_movies'
 const SELECTED_MOVIE_VIEW_REGULAR = 'regular_page_active_movie_view'
 const SELECTED_MOVIE_VIEW_FAVORITE = 'fav_page_active_movie_view'
 
+const SELECTED_SORTING_REGULAR = 'regular_page_sorting'
+const SELECTED_SORTING_FAVORITE = 'fav_page_sorting'
+
 const USER_LIST = "user_list"
 
 export {
@@ -14,4 +17,6 @@ export {
   SELECTED_MOVIE_VIEW_REGULAR,
   SELECTED_MOVIE_VIEW_FAVORITE,
   USER_LIST,
+  SELECTED_SORTING_REGULAR,
+  SELECTED_SORTING_FAVORITE,
 }

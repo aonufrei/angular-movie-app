@@ -1,0 +1,13 @@
+<div class="search-bar-container">
+  <form class="search-bar-form" [formGroup]="form">
+    <mat-form-field class="search-bar">
+      <span matPrefix></span>
+      <input class="search-bar-input" type="tel" matInput placeholder="Search" name="search"
+             formControlName="searchQuery"
+             (input)="onTextChanged($event)">
+      <button matSuffix mat-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>

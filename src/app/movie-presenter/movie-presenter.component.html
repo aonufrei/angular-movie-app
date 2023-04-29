@@ -1,16 +1,47 @@
-<mat-button-toggle-group class="change-movie-view" name="grid_view_select">
-  <mat-button-toggle value="grid_view" [checked]="isGridView()" (click)="onViewOptionChanged(GRID_VIEW)">Grid
-  </mat-button-toggle>
-  <mat-button-toggle value="list_view" [checked]="isListView()" (click)="onViewOptionChanged(LIST_VIEW)">List
-  </mat-button-toggle>
-</mat-button-toggle-group>
+<div fxLayoutAlign="space-between center">
+  <div fxFlex="66%" fxLayoutAlign="start center">
+    <mat-button-toggle-group name="grid_view_select" class="movie-option">
+      <mat-button-toggle value="grid_view" [checked]="isGridView()" (click)="onViewOptionChanged(GRID_VIEW)">Grid
+      </mat-button-toggle>
+      <mat-button-toggle value="list_view" [checked]="isListView()" (click)="onViewOptionChanged(LIST_VIEW)">List
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <div>
+      <mat-button-toggle-group class="movie-option">
+        <mat-button-toggle value="name" [checked]="sortOpt.field === SortMovieField.NAME"
+                           (click)="onSortFieldChanged(SortMovieField.NAME)">Name
+        </mat-button-toggle>
+        <mat-button-toggle value="year" [checked]="sortOpt.field === SortMovieField.YEAR"
+                           (click)="onSortFieldChanged(SortMovieField.YEAR)">Year
+        </mat-button-toggle>
+        <mat-button-toggle value="created_date" [checked]="sortOpt.field === SortMovieField.CREATED_DATE"
+                           (click)="onSortFieldChanged(SortMovieField.CREATED_DATE)">
+          Created Date
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <mat-button-toggle-group>
+        <mat-button-toggle [checked]="sortOpt.order === SortOrder.ASC" (click)="onSortOrderChanged(SortOrder.ASC)"
+                           value="asc">ASC
+        </mat-button-toggle>
+        <mat-button-toggle [checked]="sortOpt.order === SortOrder.DESC" (click)="onSortOrderChanged(SortOrder.DESC)"
+                           value="desc">DESC
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div fxFlex="33%" fxLayoutAlign="center">
+    <app-search-bar (searchEvent)="onSearchEvent($event)"></app-search-bar>
+  </div>
+
+</div>
 
 <div class="grid-container">
   <mat-grid-list [cols]="columnAmount" rowHeight="500px" gutterSize="10px" *ngIf="!isListView()">
-    <mat-grid-tile *ngFor="let m of movies">
+    <mat-grid-tile *ngFor="let m of sortedMovies">
       <mat-card fxLayout="column" class="movie-card">
         <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"
-             fxLayoutAlign="end start">>
+             fxLayoutAlign="end start">
           <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="warn"
                   (click)="onMovieDelete(m.id)">
             <mat-icon>delete</mat-icon>
@@ -36,7 +67,7 @@
   </mat-grid-list>
 
   <mat-grid-list cols="1" rowHeight="300px" gutterSize="5px" *ngIf="isListView()">
-    <mat-grid-tile *ngFor="let m of movies">
+    <mat-grid-tile *ngFor="let m of sortedMovies">
       <mat-card fxLayout="row" class="movie-list-card-item">
         <div class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"></div>
         <div class="movie-list-card-information" fxLayout="column" fxFlexAlign="space-between" [style.width]="'100%'"

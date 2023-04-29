@@ -1,11 +1,14 @@
 <section class="movie-section">
 
-  <app-movie-presenter [movies]="movieService.getMoviesForUser(1)" [moviesView]="moviesView"
+  <app-movie-presenter [movies]="movies" [moviesView]="moviesView"
                        [columnAmount]="columnAmount"
                        [showDelete]="true"
+                       [sortOpt]="sorting"
                        (viewChangedEvent)="onViewOptionChanged($event)"
                        (movieLikedEvent)="onMovieLikedOrDislike($event)"
-                       (movieDeleteEvent)="onMovieDelete($event)">
+                       (movieDeleteEvent)="onMovieDelete($event)"
+                       (searchEvent)="onSearch($event)"
+                       (sortEvent)="onSortingChanged($event)">
   </app-movie-presenter>
 
 </section>

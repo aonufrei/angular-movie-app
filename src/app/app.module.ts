@@ -21,7 +21,7 @@ import {IncomePipe} from "./income.pipe";
 import {MatListModule} from "@angular/material/list";
 import {MoviePresenterComponent} from './movie-presenter/movie-presenter.component';
 import {MatIconModule} from "@angular/material/icon";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {CreateMovieDialogComponent} from './create-movie-dialog/create-movie-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
@@ -30,6 +30,7 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { UserPageComponent } from './user-page/user-page.component';
 import {MatSelectModule} from "@angular/material/select";
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -46,26 +47,28 @@ import {MatSelectModule} from "@angular/material/select";
     RegisterDialogComponent,
     LoginDialogComponent,
     UserPageComponent,
+    SearchBarComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatButtonToggleModule,
-    MatGridListModule,
-    MatCardModule,
-    MatDialogModule,
-    MatListModule,
-    MatIconModule,
-    MatSnackBarModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatButtonToggleModule,
+        MatGridListModule,
+        MatCardModule,
+        MatDialogModule,
+        MatListModule,
+        MatIconModule,
+        MatSnackBarModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule,
+        FormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

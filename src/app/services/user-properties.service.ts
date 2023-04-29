@@ -1,11 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  SELECTED_MOVIE_VIEW,
-  SELECTED_MOVIE_VIEW_FAVORITE,
-  SELECTED_MOVIE_VIEW_REGULAR,
-  SELECTED_NAVIGATION_OPTION,
-} from "../common/UserPropertiesConstants";
-import {GUEST_USER, User} from "../common/User";
+import {SortMovieField, SortMovieOption, SortOrder} from "../common/ListOptions";
 
 @Injectable({
   providedIn: 'root'
@@ -15,52 +9,59 @@ export class UserPropertiesService {
   private defaultSelectedNavOpt = 1
   private defaultSelectedMovieView = "grid"
 
+  private defaultSorting: SortMovieOption = {
+    field: SortMovieField.YEAR,
+    order: SortOrder.ASC
+  }
+
   constructor() {
   }
 
-  getSelectedNavigationOption(): number {
-    const activeOption = localStorage.getItem(SELECTED_NAVIGATION_OPTION)
+  getNumberFromParam(paramName: string): number {
+    const activeOption = localStorage.getItem(paramName)
     if (activeOption) {
       try {
         return parseInt(activeOption)
       } catch (e) {
-        console.log("Invalid value is provided to local storage. Cannot parse active nav option");
-        localStorage.removeItem(SELECTED_NAVIGATION_OPTION)
+        console.log(`Invalid value is provided to local storage. Cannot parse param named ${paramName}`);
+        localStorage.removeItem(paramName)
       }
     }
     return this.defaultSelectedNavOpt
   }
 
-  setSelectedNavigationOption(id: number) {
-    localStorage.setItem(SELECTED_NAVIGATION_OPTION, id.toString())
-  }
-
-  getSelectedMovieViewOptionOnRegular(): string {
-    return this.fetchMovieViewOption(SELECTED_MOVIE_VIEW_REGULAR)
-  }
-
-  getSelectedMovieViewOptionOnFavorites(): string {
-    return this.fetchMovieViewOption(SELECTED_MOVIE_VIEW_FAVORITE)
-  }
-
-  fetchMovieViewOption(optName: string) {
-    const activeOption = localStorage.getItem(optName)
+  getMovieViewOption(paramName: string) {
+    const activeOption = localStorage.getItem(paramName)
     if (activeOption) {
       return activeOption
     }
     return this.defaultSelectedMovieView;
   }
 
-  setSelectedMovieViewOption(option: string) {
-    localStorage.setItem(SELECTED_MOVIE_VIEW, option)
+  setNumberParam(optionName: string, value: number) {
+    localStorage.setItem(optionName, value.toString())
   }
 
-  setSelectedMovieViewRegular(option: string) {
-    localStorage.setItem(SELECTED_MOVIE_VIEW_REGULAR, option)
+  setStringParam(optionName: string, value: string) {
+    localStorage.setItem(optionName, value)
   }
 
-  setSelectedMovieViewFavorite(option: string) {
-    localStorage.setItem(SELECTED_MOVIE_VIEW_FAVORITE, option)
+  setSortingParam(optionName: string, value: SortMovieOption) {
+    localStorage.setItem(optionName, JSON.stringify(value))
+  }
+
+  getSortingFromParam(optionName: string): SortMovieOption {
+    const value = localStorage.getItem(optionName)
+    if (value) {
+      try {
+        return JSON.parse(value) || this.defaultSorting
+      } catch (e) {
+        console.log(`Invalid value is provided to local storage. Cannot parse param named ${optionName}`);
+        localStorage.removeItem(optionName)
+      }
+    }
+
+    return this.defaultSorting
   }
 
 }
