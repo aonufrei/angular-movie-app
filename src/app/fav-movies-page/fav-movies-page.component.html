@@ -2,6 +2,7 @@
 
   <app-movie-presenter [movies]="movies" [moviesView]="moviesView"
                        [sortOpt]="sorting"
+                       [showMark]="showMark"
                        [columnAmount]="columnAmount"
                        (viewChangedEvent)="onViewOptionChanged($event)"
                        (movieLikedEvent)="onMovieLikedOrDislike($event)"

@@ -75,6 +75,26 @@ export class AuthService {
     this.updateCurrentUser()
   }
 
+  getEditMoviePermissionFor(user: User) {
+    return user.role >= UserRole.MODERATOR
+  }
+
+  getMarkMoviePermissionFor(user: User) {
+    return user.role >= UserRole.REGULAR
+  }
+
+  getAddMoviePermissionFor(user: User) {
+    return user.role >= UserRole.MODERATOR
+  }
+
+  getManageUsersPermissionFor(user: User) {
+    return user.role >= UserRole.ADMIN
+  }
+
+  getFavoriteMoviesPagePermissionFor(user: User) {
+    return user.role > UserRole.GUEST
+  }
+
   buildUser(username: string, password: string, role: UserRole): User {
     return {
       id: Math.floor(Math.random() * 99999999),

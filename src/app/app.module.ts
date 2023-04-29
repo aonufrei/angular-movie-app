@@ -24,16 +24,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {CreateMovieDialogComponent} from './create-movie-dialog/create-movie-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import {RegisterDialogComponent} from './register-dialog/register-dialog.component';
+import {LoginDialogComponent} from './login-dialog/login-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { UserPageComponent } from './user-page/user-page.component';
 import {MatSelectModule} from "@angular/material/select";
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {SearchBarComponent} from './search-bar/search-bar.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {MatMenuModule} from "@angular/material/menu";
-import { UserManagementDialogComponent } from './user-manager-dialog/user-management-dialog.component';
+import {UserManagementDialogComponent} from './user-manager-dialog/user-management-dialog.component';
 import {MatTableModule} from "@angular/material/table";
+import { NoAccessPageComponent } from './no-access-page/no-access-page.component';
 
 @NgModule({
   declarations: [
@@ -48,10 +48,10 @@ import {MatTableModule} from "@angular/material/table";
     CreateMovieDialogComponent,
     RegisterDialogComponent,
     LoginDialogComponent,
-    UserPageComponent,
     SearchBarComponent,
     PageNotFoundComponent,
     UserManagementDialogComponent,
+    NoAccessPageComponent,
   ],
   imports: [
     BrowserModule,

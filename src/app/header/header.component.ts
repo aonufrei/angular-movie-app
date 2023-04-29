@@ -3,7 +3,7 @@ import {NavbarOption} from "../common/NavbarOption";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateMovieDialogComponent} from "../create-movie-dialog/create-movie-dialog.component";
 import {AuthService} from "../services/auth.service";
-import {GUEST_USER, User} from "../common/User";
+import {GUEST_USER} from "../common/User";
 import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
 import {MovieDialogType} from "../common/MovieDialogData";
@@ -23,7 +23,8 @@ export class HeaderComponent implements OnInit {
     this.navOptions = options;
   }
 
-  @Input() showAddMovieBtn: boolean = false
+  showAddMovieBtn: boolean = this.authService.getAddMoviePermissionFor(this.user)
+  showManageUsersBtn: boolean = this.authService.getManageUsersPermissionFor(this.user)
 
   @Output() navOptionChangedEvent = new EventEmitter<number>();
 
@@ -38,6 +39,7 @@ export class HeaderComponent implements OnInit {
     this.currentUserObserver.subscribe(user => {
       this.user = user
       this.authenticated = user.role !== GUEST_USER.role
+      this.redefineButtonsPermissions()
     })
   }
 
@@ -77,6 +79,11 @@ export class HeaderComponent implements OnInit {
         this.showRegister()
       }
     });
+  }
+
+  redefineButtonsPermissions() {
+    this.showAddMovieBtn = this.authService.getAddMoviePermissionFor(this.user)
+    this.showManageUsersBtn = this.authService.getManageUsersPermissionFor(this.user)
   }
 
   showRegister() {

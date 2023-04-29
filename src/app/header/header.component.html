@@ -5,9 +5,9 @@
     <a *ngFor="let opt of navOptions;" [ngClass]="opt.selected ? 'navbar-opt navbar-opt-toggled' : 'navbar-opt'"
        [routerLink]="opt.routingUrl" (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
   </nav>
-  <span *ngIf="showAddMovieBtn">
-    <button mat-raised-button [style.margin-right]="'20px'" (click)="openAddMovieDialog()">Add Movie</button>
-    <button mat-raised-button (click)="openManageUsersDialog()">Manage Users</button>
+  <span>
+    <button *ngIf="showAddMovieBtn" mat-raised-button [style.margin-right]="'20px'" (click)="openAddMovieDialog()">Add Movie</button>
+    <button *ngIf="showManageUsersBtn" mat-raised-button (click)="openManageUsersDialog()">Manage Users</button>
   </span>
   </div>
   <div fxLayoutAlign="space-between center">

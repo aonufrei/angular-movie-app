@@ -15,7 +15,8 @@ export class MoviePresenterComponent {
   @Input() movies: Movie[] = []
   @Input() moviesView: string = GRID_VIEW
   @Input() columnAmount: number = 1
-  @Input() showDelete: boolean = false
+  @Input() showEdit: boolean = false
+  @Input() showMark: boolean = false
   @Input() sortOpt: SortMovieOption = {field: SortMovieField.NAME, order: SortOrder.ASC}
 
   @Output() viewChangedEvent = new EventEmitter<string>()

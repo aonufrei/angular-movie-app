@@ -20,6 +20,10 @@ export class FavMoviesPageComponent implements OnInit, OnDestroy{
   search = ''
   sorting: SortMovieOption = this.userProperties.getSortingFromParam(SELECTED_SORTING_FAVORITE)
 
+  currentUser = this.authService.currentUser
+
+  showMark = this.authService.getMarkMoviePermissionFor(this.currentUser)
+
   moviesView = this.userProperties.getMovieViewOption(SELECTED_MOVIE_VIEW_FAVORITE)
   movieRetrieval = () => this.movieService.getUserFavoriteMovies(this.authService.currentUser.id)
 
@@ -65,7 +69,10 @@ export class FavMoviesPageComponent implements OnInit, OnDestroy{
     this.movieService.getMoviesObservable().subscribe(movies => {
       this.onSearch(this.search)
     })
-    this.authService.getUserObserver().subscribe(() => this.onSearch(this.search))
+    this.authService.getUserObserver().subscribe(() => {
+      this.onSearch(this.search)
+      this.showMark = this.authService.getMarkMoviePermissionFor(this.currentUser)
+    })
   }
 
   onViewOptionChanged(option: string) {

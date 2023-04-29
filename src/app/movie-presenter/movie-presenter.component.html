@@ -30,7 +30,7 @@
       </mat-button-toggle-group>
     </div>
   </div>
-  <div fxFlex="33%" fxLayoutAlign="center">
+  <div fxFlex="33%" fxLayoutAlign="end center">
     <app-search-bar (searchEvent)="onSearchEvent($event)"></app-search-bar>
   </div>
 
@@ -42,7 +42,7 @@
       <mat-card fxLayout="column" class="movie-card">
         <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"
              fxLayoutAlign="end start">
-          <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="primary"
+          <button class="delete-movie-btn" *ngIf="showEdit" mat-icon-button color="primary"
                   [matMenuTriggerFor]="menu">
             <mat-icon>tune</mat-icon>
           </button>
@@ -55,7 +55,7 @@
           <div>
             <div fxLayout="row" fxLayoutAlign="space-between center">
               <span class="movie-card-title">{{m.name}}</span>
-              <button mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
+              <button *ngIf="showMark" mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
                 <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
               </button>
             </div>
@@ -80,10 +80,10 @@
             <div fxLayoutAlign="space-between center">
               <span class="movie-card-title">{{m.name}}</span>
               <div>
-                <button mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
+                <button *ngIf="showMark" mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
                   <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
                 </button>
-                <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="primary"
+                <button class="delete-movie-btn" *ngIf="showEdit" mat-icon-button color="primary"
                         [matMenuTriggerFor]="menu">
                   <mat-icon>tune</mat-icon>
                 </button>

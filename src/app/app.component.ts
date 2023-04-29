@@ -3,6 +3,7 @@ import {createNavbarOption, NavbarOption} from "./common/NavbarOption";
 import {NavigationEnd, Router} from "@angular/router";
 import {UserPropertiesService} from "./services/user-properties.service";
 import {SELECTED_NAVIGATION_OPTION} from "./common/UserPropertiesConstants";
+import {AuthService} from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -14,15 +15,27 @@ export class AppComponent implements OnInit {
 
   is404Page = false
 
-  navOptions: NavbarOption[] = [
-    createNavbarOption(1, "Movies", '/movies'),
-    createNavbarOption(2, "Favorites", '/favorites'),
-    // createNavbarOption( 3, "User Management", '/user-page')
-  ]
+  favMoviesOption = createNavbarOption(2, "Favorites", '/favorites')
+
+  navOptions: NavbarOption[]
 
   showAddMovieBtn: boolean = false
 
-  constructor(private router: Router, private userProperties: UserPropertiesService) {
+  constructor(private router: Router, private authService: AuthService, private userProperties: UserPropertiesService) {
+    this.navOptions = [
+      createNavbarOption(1, "Movies", '/movies'),
+      // createNavbarOption(2, "Favorites", '/favorites'),
+      // createNavbarOption( 3, "User Management", '/user-page')
+    ]
+    authService.getUserObserver().subscribe(u => {
+      if (authService.getFavoriteMoviesPagePermissionFor(u)) {
+        if (!this.navOptions.find(o => o.id === this.favMoviesOption.id)) {
+          this.navOptions = [...this.navOptions, this.favMoviesOption]
+        }
+      } else {
+        this.navOptions = this.navOptions.filter(o => o.id !== this.favMoviesOption.id)
+      }
+    })
   }
 
   onNavOptionClicked(id: number) {
