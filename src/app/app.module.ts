@@ -13,7 +13,6 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
 import {EditorComponent} from './editor/editor.component';
-import {NotFoundComponent} from './not-found/not-found.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
@@ -31,6 +30,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { UserPageComponent } from './user-page/user-page.component';
 import {MatSelectModule} from "@angular/material/select";
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,13 +41,13 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     FavMoviesPageComponent,
     IncomePipe,
     EditorComponent,
-    NotFoundComponent,
     MoviePresenterComponent,
     CreateMovieDialogComponent,
     RegisterDialogComponent,
     LoginDialogComponent,
     UserPageComponent,
     SearchBarComponent,
+    PageNotFoundComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,6 +1,7 @@
-<app-header [showAddMovieBtn]="showAddMovieBtn" [setNavOptions]="navOptions" (navOptionChangedEvent)="onNavOptionClicked($event)"></app-header>
+<app-header *ngIf="!is404Page" [showAddMovieBtn]="showAddMovieBtn" [setNavOptions]="navOptions"
+            (navOptionChangedEvent)="onNavOptionClicked($event)"></app-header>
 
 <router-outlet></router-outlet>
 
 <div [style.height]="'100px'"></div>
-<app-footer></app-footer>
+<app-footer *ngIf="!is404Page"></app-footer>

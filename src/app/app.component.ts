@@ -10,7 +10,10 @@ import {SELECTED_NAVIGATION_OPTION} from "./common/UserPropertiesConstants";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'movie-app';
+  title = 'movie-app'
+
+  is404Page = false
+
   navOptions: NavbarOption[] = [
     createNavbarOption(1, "Movies", '/movies'),
     createNavbarOption(2, "Favorites", '/favorites'),
@@ -35,12 +38,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const navOpt = this.navOptions.filter(opt => event.url.startsWith(opt.routingUrl))
-        console.log(navOpt)
+        const currentUrl = event.urlAfterRedirects
+        const navOpt = this.navOptions.filter(opt => currentUrl.startsWith(opt.routingUrl))
         if (navOpt.length > 0) {
-          console.log(navOpt[0])
           this.selectNavOption(navOpt[0].id)
         }
+        this.is404Page = currentUrl.startsWith('/404')
       }
     })
 
