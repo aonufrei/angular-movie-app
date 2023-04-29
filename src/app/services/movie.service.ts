@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Movie, MovieForm} from "../common/Movies";
 import {LikeService} from "./like.service";
-import {SortMovieField, SortMovieOption, SortOrder} from "../common/ListOptions";
+import {SortMovieOption} from "../common/ListOptions";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,8 @@ export class MovieService {
     }
   ]
 
+  private movieListSubject: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([])
+
   createDateFromString(s: string) {
     const d = new Date()
     d.setTime(Date.parse(s))
@@ -57,6 +60,10 @@ export class MovieService {
 
   }
 
+  getMoviesObservable(): Observable<Movie[]> {
+      return this.movieListSubject.asObservable();
+  }
+
   getMovies() {
     // TODO: Use LocalStorage
     return [...this.movieDB]
@@ -64,10 +71,21 @@ export class MovieService {
 
   addMovie(movie: Movie) {
     this.movieDB = [...this.movieDB, movie]
+    this.movieListSubject.next(this.movieDB)
+  }
+
+  updateMovie(id: number, movie: Movie) {
+    this.movieDB = [...this.movieDB.map(m => m.id !== id ? {...m} : {...movie, id})]
+    this.movieListSubject.next(this.movieDB)
+  }
+
+  getMovieById(id: number): Movie | undefined {
+    return this.movieDB.find(m => m.id === id)
   }
 
   removeMovie(movieId: number) {
     this.movieDB = [...this.movieDB.filter(m => m.id !== movieId)]
+    this.movieListSubject.next(this.movieDB)
   }
 
   getMoviesForUser(userId: number) {

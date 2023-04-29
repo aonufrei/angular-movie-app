@@ -12,6 +12,9 @@ import {
   SELECTED_MOVIE_VIEW_REGULAR,
   SELECTED_SORTING_REGULAR
 } from "../common/UserPropertiesConstants";
+import {CreateMovieDialogComponent} from "../create-movie-dialog/create-movie-dialog.component";
+import {MovieDialogType} from "../common/MovieDialogData";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-movies-page',
@@ -34,11 +37,12 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
     [Breakpoints.XSmall, 1],
     [Breakpoints.Small, 2],
     [Breakpoints.Medium, 4],
-    [Breakpoints.Large, 5],
-    [Breakpoints.XLarge, 6],
+    [Breakpoints.Large, 4],
+    [Breakpoints.XLarge, 5],
   ]);
 
-  constructor(public userProperties: UserPropertiesService,
+  constructor(public dialog: MatDialog,
+              public userProperties: UserPropertiesService,
               public movieService: MovieService,
               public likeService: LikeService,
               private authService: AuthService,
@@ -64,6 +68,9 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.moviesView = this.userProperties.getMovieViewOption(SELECTED_MOVIE_VIEW_REGULAR)
     this.sorting = this.userProperties.getSortingFromParam(SELECTED_SORTING_REGULAR)
+    this.movieService.getMoviesObservable().subscribe(movies => {
+      this.onSearch(this.search)
+    })
   }
 
   onViewOptionChanged(option: string) {
@@ -77,8 +84,20 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
     this.onSearch(this.search)
   }
 
-  onMovieDelete(id: number) {
+  onUpdateMovie(id: number) {
+    const dialogRef = this.dialog.open(CreateMovieDialogComponent, {
+      panelClass: 'dialog-responsive',
+      data: {movieId: id, type: MovieDialogType.UPDATE}
+    });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      console.log("Create Movie Dialog closed")
+    });
+  }
+
+  onDeleteMovie(id: number) {
     this.movieService.removeMovie(id)
+    // this.onSearch(this.search)
   }
 
   onSearch(query: string) {

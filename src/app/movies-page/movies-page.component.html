@@ -6,7 +6,8 @@
                        [sortOpt]="sorting"
                        (viewChangedEvent)="onViewOptionChanged($event)"
                        (movieLikedEvent)="onMovieLikedOrDislike($event)"
-                       (movieDeleteEvent)="onMovieDelete($event)"
+                       (movieUpdateEvent)="onUpdateMovie($event)"
+                       (movieDeleteEvent)="onDeleteMovie($event)"
                        (searchEvent)="onSearch($event)"
                        (sortEvent)="onSortingChanged($event)">
   </app-movie-presenter>

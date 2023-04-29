@@ -42,10 +42,18 @@
       <mat-card fxLayout="column" class="movie-card">
         <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"
              fxLayoutAlign="end start">
-          <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="warn"
-                  (click)="onMovieDelete(m.id)">
-            <mat-icon>delete</mat-icon>
+          <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="primary"
+                  [matMenuTriggerFor]="menu">
+            <mat-icon>tune</mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onUpdateMovie(m.id)">Update</button>
+            <button mat-menu-item (click)="onDeleteMovie(m.id)">Delete</button>
+          </mat-menu>
+          <!--          <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="warn"-->
+          <!--                  (click)="onMovieDelete(m.id)">-->
+          <!--            <mat-icon>tune</mat-icon>-->
+          <!--          </button>-->
         </div>
         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="space-between" class="movie-card-info">
           <div>
@@ -75,9 +83,19 @@
           <div fxFlex="30%">
             <div fxLayoutAlign="space-between center">
               <span class="movie-card-title">{{m.name}}</span>
-              <button mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
-                <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
-              </button>
+              <div>
+                <button mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
+                  <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
+                </button>
+                <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="primary"
+                        [matMenuTriggerFor]="menu">
+                  <mat-icon>tune</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="onUpdateMovie(m.id)">Update</button>
+                  <button mat-menu-item (click)="onDeleteMovie(m.id)">Delete</button>
+                </mat-menu>
+              </div>
             </div>
             <span class="movie-card-year">{{m.year}}</span>
             <span class="movie-card-income">{{m.income | income }}</span>
@@ -85,10 +103,6 @@
           <div fxFlex="70%" fxLayout="row" fxLayoutAlign="end end">
             <div fxLayoutAlign="space-around center">
               <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
-              <button class="delete-movie-btn" *ngIf="showDelete" mat-icon-button color="warn"
-                      (click)="onMovieDelete(m.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
             </div>
           </div>
         </div>

@@ -31,6 +31,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import {MatSelectModule} from "@angular/material/select";
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -49,26 +50,27 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SearchBarComponent,
     PageNotFoundComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatTabsModule,
-        MatButtonToggleModule,
-        MatGridListModule,
-        MatCardModule,
-        MatDialogModule,
-        MatListModule,
-        MatIconModule,
-        MatSnackBarModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatSelectModule,
-        FormsModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatButtonToggleModule,
+    MatGridListModule,
+    MatCardModule,
+    MatDialogModule,
+    MatListModule,
+    MatIconModule,
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    MatMenuModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {compareMovies, GRID_VIEW, LIST_VIEW, Movie} from "../common/Movies";
 import {SortOrder, SortMovieField, SortMovieOption} from "../common/ListOptions";
+import {CreateMovieDialogComponent} from "../create-movie-dialog/create-movie-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {MovieDialogType} from "../common/MovieDialogData";
 
 @Component({
   selector: 'app-movie-presenter',
@@ -17,11 +20,12 @@ export class MoviePresenterComponent {
 
   @Output() viewChangedEvent = new EventEmitter<string>()
   @Output() movieLikedEvent = new EventEmitter<number>()
+  @Output() movieUpdateEvent = new EventEmitter<number>()
   @Output() movieDeleteEvent = new EventEmitter<number>()
   @Output() searchEvent = new EventEmitter<string>()
   @Output() sortEvent = new EventEmitter<SortMovieOption>()
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   onViewOptionChanged(option: string) {
@@ -32,7 +36,12 @@ export class MoviePresenterComponent {
     this.movieLikedEvent.emit(id)
   }
 
-  onMovieDelete(id: number) {
+  onUpdateMovie(id: number) {
+    this.movieUpdateEvent.emit(id)
+  }
+
+  onDeleteMovie(id: number) {
+    console.log("delete")
     this.movieDeleteEvent.emit(id)
   }
 
@@ -54,6 +63,17 @@ export class MoviePresenterComponent {
       ...this.sortOpt,
       order
     })
+  }
+
+  openUpdateMovieDialog(id: number) {
+    const dialogRef = this.dialog.open(CreateMovieDialogComponent, {
+      panelClass: 'dialog-responsive',
+      data: {movieId: id, type: MovieDialogType.UPDATE}
+    });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      console.log("Create Movie Dialog closed")
+    });
   }
 
   get sortedMovies() {

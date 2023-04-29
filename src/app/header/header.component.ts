@@ -6,6 +6,7 @@ import {AuthService} from "../services/auth.service";
 import {GUEST_USER} from "../common/User";
 import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
+import {MovieDialogType} from "../common/MovieDialogData";
 
 @Component({
   selector: 'app-header',
@@ -36,7 +37,8 @@ export class HeaderComponent {
 
   openAddMovieDialog() {
     const dialogRef = this.dialog.open(CreateMovieDialogComponent, {
-      panelClass: 'dialog-responsive'
+      panelClass: 'dialog-responsive',
+      data: {movieId: -1, type: MovieDialogType.CREATE}
     });
 
     dialogRef.afterClosed().subscribe(_ => {
