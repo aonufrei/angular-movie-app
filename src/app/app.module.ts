@@ -32,6 +32,8 @@ import {MatSelectModule} from "@angular/material/select";
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { UserManagementDialogComponent } from './user-manager-dialog/user-management-dialog.component';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import {MatMenuModule} from "@angular/material/menu";
     UserPageComponent,
     SearchBarComponent,
     PageNotFoundComponent,
+    UserManagementDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import {MatMenuModule} from "@angular/material/menu";
     MatSelectModule,
     FormsModule,
     MatMenuModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

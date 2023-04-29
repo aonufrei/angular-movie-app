@@ -6,11 +6,12 @@
        [routerLink]="opt.routingUrl" (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
   </nav>
   <span *ngIf="showAddMovieBtn">
-    <button mat-raised-button (click)="openAddMovieDialog()">Add Movie</button>
+    <button mat-raised-button [style.margin-right]="'20px'" (click)="openAddMovieDialog()">Add Movie</button>
+    <button mat-raised-button (click)="openManageUsersDialog()">Manage Users</button>
   </span>
   </div>
   <div fxLayoutAlign="space-between center">
-    <a class="header-user-name">{{authService.currentUser.username}}</a>
+    <a class="header-user-name">{{user.username}}</a>
     <button class="header-user-action" mat-icon-button color="warn" (click)="authenticated ? logout() : showLogin()">
       <mat-icon>{{authenticated ? 'logout' : 'login'}}</mat-icon>
     </button>

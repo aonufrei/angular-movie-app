@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   navOptions: NavbarOption[] = [
     createNavbarOption(1, "Movies", '/movies'),
     createNavbarOption(2, "Favorites", '/favorites'),
-    createNavbarOption( 3, "User Management", '/user-page')
+    // createNavbarOption( 3, "User Management", '/user-page')
   ]
 
   showAddMovieBtn: boolean = false

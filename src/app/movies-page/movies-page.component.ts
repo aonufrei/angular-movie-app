@@ -71,6 +71,7 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
     this.movieService.getMoviesObservable().subscribe(movies => {
       this.onSearch(this.search)
     })
+    this.authService.getUserObserver().subscribe(() => this.onSearch(this.search))
   }
 
   onViewOptionChanged(option: string) {

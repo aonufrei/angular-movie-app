@@ -62,6 +62,10 @@ export class FavMoviesPageComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.moviesView = this.userProperties.getMovieViewOption(SELECTED_MOVIE_VIEW_FAVORITE)
     this.sorting = this.userProperties.getSortingFromParam(SELECTED_SORTING_FAVORITE)
+    this.movieService.getMoviesObservable().subscribe(movies => {
+      this.onSearch(this.search)
+    })
+    this.authService.getUserObserver().subscribe(() => this.onSearch(this.search))
   }
 
   onViewOptionChanged(option: string) {

@@ -1,0 +1,65 @@
+<mat-card class="page-content">
+  <h2>Available users:</h2>
+
+  <table mat-table [dataSource]="this.users" [style.margin-bottom]="'20px'">
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Username </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-button-toggle-group>
+          <mat-button-toggle *ngIf="element.id !== currentUser.id" value="name" [checked]="element.role === UserRole.REGULAR"
+                             (click)="onChangedRole(element.id, UserRole.REGULAR)">Regular
+          </mat-button-toggle>
+          <mat-button-toggle *ngIf="element.id !== currentUser.id" value="year" [checked]="element.role === UserRole.MODERATOR"
+                             (click)="onChangedRole(element.id, UserRole.MODERATOR)">Moderator
+          </mat-button-toggle>
+          <mat-button-toggle value="created_date" [checked]="element.role === UserRole.ADMIN"
+                             (click)="onChangedRole(element.id, UserRole.ADMIN)">
+            Admin
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+<!--  <div *ngFor="let u of users" class="users-container" fxLayoutAlign="space-between center">-->
+
+
+<!--    <span class="user-card-username">{{u.username}}</span>-->
+<!--&lt;!&ndash;    <mat-form-field appearance="fill">&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-label>Select</mat-label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-select (selectionChange)="onChangedRole(u.id, $event)" [value]="u.role">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-option [value]="UserRole.ADMIN">Admin</mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-option [disabled]="u.id === this.authService.currentUser.id" [value]="UserRole.MODERATOR">Moderator&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-option [disabled]="u.id === this.authService.currentUser.id" [value]="UserRole.REGULAR">Regular&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-select>&ndash;&gt;-->
+<!--&lt;!&ndash;    </mat-form-field>&ndash;&gt;-->
+<!--    <mat-button-toggle-group>-->
+<!--      <mat-button-toggle *ngIf="u.id !== currentUser.id" value="name" [checked]="u.role === UserRole.REGULAR"-->
+<!--                         (click)="onChangedRole(u.id, UserRole.REGULAR)">Regular-->
+<!--      </mat-button-toggle>-->
+<!--      <mat-button-toggle *ngIf="u.id !== currentUser.id" value="year" [checked]="u.role === UserRole.MODERATOR"-->
+<!--                         (click)="onChangedRole(u.id, UserRole.MODERATOR)">Moderator-->
+<!--      </mat-button-toggle>-->
+<!--      <mat-button-toggle value="created_date" [checked]="u.role === UserRole.ADMIN"-->
+<!--                         (click)="onChangedRole(u.id, UserRole.ADMIN)">-->
+<!--       Admin-->
+<!--      </mat-button-toggle>-->
+<!--    </mat-button-toggle-group>-->
+
+<!--  </div>-->
+
+  <button mat-raised-button color="primary" type="button"
+          (click)="onCloseClicked()">Close
+  </button>
+</mat-card>

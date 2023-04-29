@@ -1,19 +1,23 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {NavbarOption} from "../common/NavbarOption";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateMovieDialogComponent} from "../create-movie-dialog/create-movie-dialog.component";
 import {AuthService} from "../services/auth.service";
-import {GUEST_USER} from "../common/User";
+import {GUEST_USER, User} from "../common/User";
 import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
 import {MovieDialogType} from "../common/MovieDialogData";
+import {UserManagementDialogComponent} from "../user-manager-dialog/user-management-dialog.component";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+
+  user = this.authService.currentUser
+  authenticated = false
 
   @Input() set setNavOptions(options: NavbarOption[]) {
     this.navOptions = options;
@@ -23,9 +27,18 @@ export class HeaderComponent {
 
   @Output() navOptionChangedEvent = new EventEmitter<number>();
 
+  currentUserObserver = this.authService.getUserObserver()
+
   navOptions: NavbarOption[] = []
 
   constructor(public dialog: MatDialog, public authService: AuthService) {
+  }
+
+  ngOnInit() {
+    this.currentUserObserver.subscribe(user => {
+      this.user = user
+      this.authenticated = user.role !== GUEST_USER.role
+    })
   }
 
   onOptionChanged(id: number) {
@@ -43,6 +56,16 @@ export class HeaderComponent {
 
     dialogRef.afterClosed().subscribe(_ => {
       console.log("Create Movie Dialog closed")
+    });
+  }
+
+  openManageUsersDialog() {
+    const dialogRef = this.dialog.open(UserManagementDialogComponent, {
+      panelClass: 'dialog-responsive'
+    });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      console.log("User Management dialog was closed")
     });
   }
 
@@ -68,10 +91,6 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout()
-  }
-
-  get authenticated() {
-    return this.authService.currentUser.role !== GUEST_USER.role
   }
 
 }

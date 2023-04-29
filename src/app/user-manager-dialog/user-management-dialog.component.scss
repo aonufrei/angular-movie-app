@@ -1,0 +1,16 @@
+.page-content {
+  padding: 20px;
+}
+
+.users-container {
+  border-bottom: 1px solid black;
+}
+
+.user-card-username {
+  font-size: 1em;
+  text-transform: capitalize;
+}
+
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -1.25em;
+}
