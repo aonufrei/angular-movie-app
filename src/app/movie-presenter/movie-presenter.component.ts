@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {compareMovies, GRID_VIEW, LIST_VIEW, Movie} from "../common/Movies";
-import {SortOrder, SortMovieField, SortMovieOption} from "../common/ListOptions";
+import {SortMovieField, SortMovieOption, SortOrder} from "../common/ListOptions";
 import {CreateMovieDialogComponent} from "../create-movie-dialog/create-movie-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MovieDialogType} from "../common/MovieDialogData";

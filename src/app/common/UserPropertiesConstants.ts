@@ -1,5 +1,4 @@
 const SELECTED_NAVIGATION_OPTION = 'active_navopt'
-const SELECTED_MOVIE_VIEW = 'active_movie_view'
 const LIKED_MOVIES_BY_USERS = 'liked_movies'
 
 const SELECTED_MOVIE_VIEW_REGULAR = 'regular_page_active_movie_view'
@@ -10,13 +9,15 @@ const SELECTED_SORTING_FAVORITE = 'fav_page_sorting'
 
 const USER_LIST = "user_list"
 
+const MOVIE_LIST = "movie_db"
+
 export {
   SELECTED_NAVIGATION_OPTION,
-  SELECTED_MOVIE_VIEW,
   LIKED_MOVIES_BY_USERS,
   SELECTED_MOVIE_VIEW_REGULAR,
   SELECTED_MOVIE_VIEW_FAVORITE,
   USER_LIST,
   SELECTED_SORTING_REGULAR,
   SELECTED_SORTING_FAVORITE,
+  MOVIE_LIST,
 }

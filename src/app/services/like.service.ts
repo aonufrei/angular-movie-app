@@ -53,8 +53,12 @@ export class LikeService {
   }
 
   removeLike(like: Like) {
-    let likes = this.likesFromStorage()
-    likes = likes.filter(l => !this.isSameLike(l, like))
+    const likes = this.likesFromStorage().filter(l => !this.isSameLike(l, like))
+    localStorage.setItem(LIKED_MOVIES_BY_USERS, JSON.stringify([...likes]))
+  }
+
+  removeAllLikesForMovie(movieId: number) {
+    const likes = this.likesFromStorage().filter(l => l.movieId != movieId)
     localStorage.setItem(LIKED_MOVIES_BY_USERS, JSON.stringify([...likes]))
   }
 

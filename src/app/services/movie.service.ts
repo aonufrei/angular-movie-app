@@ -3,13 +3,15 @@ import {Movie, MovieForm} from "../common/Movies";
 import {LikeService} from "./like.service";
 import {SortMovieOption} from "../common/ListOptions";
 import {BehaviorSubject, Observable} from "rxjs";
+import {MOVIE_LIST} from "../common/UserPropertiesConstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
 
-  movieDB: Movie[] = [
+  movieDB: Movie[] = []
+  defaultMovies: Movie[] = [
     {
       id: 1,
       name: "The Lord of the Rings: The Fellowship of the Ring",
@@ -57,7 +59,8 @@ export class MovieService {
   }
 
   constructor(private likeService: LikeService) {
-
+    this.movieDB = [...this.defaultMovies, ...this.retrieveMoviesFromStorage()]
+    this.movieListSubject.next(this.movieDB)
   }
 
   getMoviesObservable(): Observable<Movie[]> {
@@ -71,12 +74,13 @@ export class MovieService {
 
   addMovie(movie: Movie) {
     this.movieDB = [...this.movieDB, movie]
-    this.movieListSubject.next(this.movieDB)
+    this.syncMovieList(this.movieDB)
   }
 
   updateMovie(id: number, movie: Movie) {
     this.movieDB = [...this.movieDB.map(m => m.id !== id ? {...m} : {...movie, id})]
     this.movieListSubject.next(this.movieDB)
+    this.syncMovieList(this.movieDB)
   }
 
   getMovieById(id: number): Movie | undefined {
@@ -85,7 +89,8 @@ export class MovieService {
 
   removeMovie(movieId: number) {
     this.movieDB = [...this.movieDB.filter(m => m.id !== movieId)]
-    this.movieListSubject.next(this.movieDB)
+    this.likeService.removeAllLikesForMovie(movieId)
+    this.syncMovieList(this.movieDB)
   }
 
   getMoviesForUser(userId: number) {
@@ -107,6 +112,26 @@ export class MovieService {
       return all
     }
     return all.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  }
+
+  private syncMovieList(movieList: Movie[]) {
+    const defaultIds = this.defaultMovies.map(m => m.id)
+    const moviesWithoutDefault = movieList.filter(m => !defaultIds.includes(m.id))
+    localStorage.setItem(MOVIE_LIST, JSON.stringify(moviesWithoutDefault))
+    this.movieListSubject.next(movieList)
+  }
+
+  private retrieveMoviesFromStorage(): Movie[] {
+    const data = localStorage.getItem(MOVIE_LIST)
+    try {
+      if (data) {
+        return JSON.parse(data)
+      }
+    } catch (e) {
+      console.log("Failed to load list of movies from local storage")
+      localStorage.removeItem(MOVIE_LIST)
+    }
+    return []
   }
 
   buildMovie(movieForm: MovieForm): Movie {

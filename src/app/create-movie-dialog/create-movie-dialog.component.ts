@@ -4,6 +4,7 @@ import {MovieService} from "../services/movie.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MovieDialogData, MovieDialogType} from "../common/MovieDialogData";
 import {MovieForm} from "../common/Movies";
+import {UserRole} from "../common/User";
 
 @Component({
   selector: 'app-create-movie-dialog',
@@ -77,6 +78,13 @@ export class CreateMovieDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  getSubmitBtnText(type: MovieDialogType) {
+    if (type === MovieDialogType.CREATE) {
+      return "Create"
+    }
+    return "Update"
+  }
+
   get title() {
     return this.form.get('title');
   }
@@ -94,4 +102,5 @@ export class CreateMovieDialogComponent implements OnInit {
   }
 
 
+  protected readonly UserRole = UserRole;
 }
