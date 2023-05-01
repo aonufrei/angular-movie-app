@@ -1,12 +1,9 @@
-<div fxLayoutAlign="space-between center">
-  <div fxFlex="66%" fxLayoutAlign="start center">
-    <mat-button-toggle-group name="grid_view_select" class="movie-option">
-      <mat-button-toggle value="grid_view" [checked]="isGridView()" (click)="onViewOptionChanged(GRID_VIEW)">Grid
-      </mat-button-toggle>
-      <mat-button-toggle value="list_view" [checked]="isListView()" (click)="onViewOptionChanged(LIST_VIEW)">List
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-    <div>
+<div fxLayoutAlign="space-between center" [fxLayout.lt-md]="'column'" [fxLayout.gt-md]="'row'">
+  <div  [fxFlex.lt-md]="'100%'" fxLayoutAlign="start center">
+    <app-search-bar (searchEvent)="onSearchEvent($event)"></app-search-bar>
+  </div>
+  <div fxLayoutAlign="end center" [fxLayout.gt-md]="'row'" [fxLayout.lt-md]="'column'">
+    <div [style.margin-right]="'20px'">
       <mat-button-toggle-group class="movie-option">
         <mat-button-toggle value="name" [checked]="sortOpt.field === SortMovieField.NAME"
                            (click)="onSortFieldChanged(SortMovieField.NAME)">Name
@@ -29,11 +26,13 @@
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
+    <mat-button-toggle-group name="grid_view_select" class="movie-option">
+      <mat-button-toggle value="grid_view" [checked]="isGridView()" (click)="onViewOptionChanged(GRID_VIEW)">Grid
+      </mat-button-toggle>
+      <mat-button-toggle value="list_view" [checked]="isListView()" (click)="onViewOptionChanged(LIST_VIEW)">List
+      </mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
-  <div fxFlex="33%" fxLayoutAlign="end center">
-    <app-search-bar (searchEvent)="onSearchEvent($event)"></app-search-bar>
-  </div>
-
 </div>
 
 <div class="grid-container">

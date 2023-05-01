@@ -5,6 +5,10 @@ import {UserPropertiesService} from "./services/user-properties.service";
 import {SELECTED_NAVIGATION_OPTION} from "./common/UserPropertiesConstants";
 import {AuthService} from "./services/auth.service";
 import {DOCUMENT} from "@angular/common";
+import {CreateMovieDialogComponent} from "./create-movie-dialog/create-movie-dialog.component";
+import {MovieDialogType} from "./common/MovieDialogData";
+import {UserManagementDialogComponent} from "./user-manager-dialog/user-management-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-root',
@@ -21,10 +25,14 @@ export class AppComponent implements OnInit {
 
   navOptions: NavbarOption[]
 
-  showAddMovieBtn: boolean = false
+  user = this.authService.currentUser
+
+  showAddMovieBtn: boolean = false //this.authService.getAddMoviePermissionFor(this.user)
+  showManageUsersBtn: boolean = false //this.authService.getManageUsersPermissionFor(this.user)
+
 
   constructor(private router: Router, private authService: AuthService, private userProperties: UserPropertiesService,
-              @Inject(DOCUMENT) private document: Document, private renderer: Renderer2) {
+              @Inject(DOCUMENT) private document: Document, private renderer: Renderer2, public dialog: MatDialog) {
     this.navOptions = [
       createNavbarOption(1, "Movies", '/movies'),
       // createNavbarOption(2, "Favorites", '/favorites'),
@@ -38,6 +46,9 @@ export class AppComponent implements OnInit {
       } else {
         this.navOptions = this.navOptions.filter(o => o.id !== this.favMoviesOption.id)
       }
+
+      this.showAddMovieBtn = this.authService.getAddMoviePermissionFor(u)
+      this.showManageUsersBtn = this.authService.getManageUsersPermissionFor(u)
     })
   }
 
@@ -55,6 +66,27 @@ export class AppComponent implements OnInit {
     this.isLightTheme = isLightTheme
     this.userProperties.setThemeMode(this.isLightTheme)
     this.renderer.setAttribute(this.document.body, 'class', this.isLightTheme ? 'lightMode' : 'darkMode')
+  }
+
+  openAddMovieDialog() {
+    const dialogRef = this.dialog.open(CreateMovieDialogComponent, {
+      panelClass: 'dialog-responsive',
+      data: {movieId: -1, type: MovieDialogType.CREATE}
+    });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      console.log("Create Movie Dialog closed")
+    });
+  }
+
+  openManageUsersDialog() {
+    const dialogRef = this.dialog.open(UserManagementDialogComponent, {
+      panelClass: 'dialog-responsive'
+    });
+
+    dialogRef.afterClosed().subscribe(_ => {
+      console.log("User Management dialog was closed")
+    });
   }
 
   ngOnInit(): void {

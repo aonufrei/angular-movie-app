@@ -1,9 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {GUEST_USER, User, UserRole} from "../common/User";
 import {AuthService} from "../services/auth.service";
-import {MatSelectChange} from "@angular/material/select";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {MovieDialogData} from "../common/MovieDialogData";
+import { MatDialogRef} from "@angular/material/dialog";
 import {SortMovieField} from "../common/ListOptions";
 
 @Component({

@@ -1,16 +1,12 @@
 <mat-toolbar class="header" fxLayoutAlign="space-between center">
   <div fxLayoutAlign="start center">
-  <span>Movie App</span>
-  <nav class="navbar">
-    <a *ngFor="let opt of navOptions;" [ngClass]="opt.selected ? 'navbar-opt navbar-opt-toggled' : 'navbar-opt'"
-       [routerLink]="opt.routingUrl" (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
-  </nav>
-  <span>
-    <button *ngIf="showAddMovieBtn" mat-raised-button [style.margin-right]="'20px'" (click)="openAddMovieDialog()">Add Movie</button>
-    <button *ngIf="showManageUsersBtn" mat-raised-button (click)="openManageUsersDialog()">Manage Users</button>
-  </span>
+    <span>Movie App</span>
+    <nav class="navbar" *ngIf="showForDesktop">
+      <a *ngFor="let opt of navOptions;" [ngClass]="opt.selected ? 'navbar-opt navbar-opt-toggled' : 'navbar-opt'"
+         [routerLink]="opt.routingUrl" (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
+    </nav>
   </div>
-  <div fxLayoutAlign="space-between center">
+  <div fxLayoutAlign="space-between center" *ngIf="showForDesktop">
     <button mat-icon-button color="light" (click)="switchTheme()">
       <mat-icon>{{isLightTheme ? 'dark_mode' : 'light_mode'}}</mat-icon>
     </button>
@@ -18,5 +14,19 @@
     <button class="header-user-action" mat-icon-button color="warn" (click)="authenticated ? logout() : showLogin()">
       <mat-icon>{{authenticated ? 'logout' : 'login'}}</mat-icon>
     </button>
+  </div>
+  <div *ngIf="showForMobile">
+    <button mat-icon-button color="light" (click)="switchTheme()">
+      <mat-icon>{{isLightTheme ? 'dark_mode' : 'light_mode'}}</mat-icon>
+    </button>
+    <button mat-icon-button color="light" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item *ngFor="let opt of navOptions;" [routerLink]="opt.routingUrl"
+         (click)="onOptionChanged(opt.id)">{{opt.label}}</a>
+      <button mat-menu-item
+              (click)="authenticated ? logout() : showLogin()">{{authenticated ? 'Logout' : 'Login'}}</button>
+    </mat-menu>
   </div>
 </mat-toolbar>

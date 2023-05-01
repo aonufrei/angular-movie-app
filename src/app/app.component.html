@@ -1,9 +1,21 @@
 <app-header *ngIf="!is404Page" [isLightTheme]="isLightTheme" [setNavOptions]="navOptions"
             (navOptionChangedEvent)="onNavOptionClicked($event)"
-            (switchThemeEvent)="onThemeChanged($event)"></app-header>
+            (switchThemeEvent)="onThemeChanged($event)" (onAddMovieEvent)="openAddMovieDialog()"
+            (onManageUsersEvent)="openManageUsersDialog()"></app-header>
 
 <router-outlet></router-outlet>
 
 <div [style.height]="'100px'"></div>
+
+<div class="fab-btn-container" fxLayout="column">
+  <button mat-fab color="primary" *ngIf="showManageUsersBtn" class="fab-btn" [style.margin-bottom]="'18px'"
+          (click)="openManageUsersDialog()">
+    <mat-icon>group</mat-icon>
+  </button>
+  <button mat-fab color="primary" *ngIf="showAddMovieBtn" class="fab-btn" (click)="openAddMovieDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
 <app-footer *ngIf="!is404Page"></app-footer>
 

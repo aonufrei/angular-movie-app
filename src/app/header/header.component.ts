@@ -1,20 +1,20 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {NavbarOption} from "../common/NavbarOption";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateMovieDialogComponent} from "../create-movie-dialog/create-movie-dialog.component";
 import {AuthService} from "../services/auth.service";
 import {GUEST_USER} from "../common/User";
 import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
-import {MovieDialogType} from "../common/MovieDialogData";
-import {UserManagementDialogComponent} from "../user-manager-dialog/user-management-dialog.component";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   user = this.authService.currentUser
   authenticated = false
@@ -25,17 +25,49 @@ export class HeaderComponent implements OnInit {
 
   @Input() isLightTheme = false
 
+  @Input() isMobile = false
+
   showAddMovieBtn: boolean = this.authService.getAddMoviePermissionFor(this.user)
   showManageUsersBtn: boolean = this.authService.getManageUsersPermissionFor(this.user)
 
   @Output() navOptionChangedEvent = new EventEmitter<number>();
   @Output() switchThemeEvent = new EventEmitter<boolean>();
+  @Output() onAddMovieEvent = new EventEmitter<boolean>();
+  @Output() onManageUsersEvent = new EventEmitter<boolean>();
 
   currentUserObserver = this.authService.getUserObserver()
 
   navOptions: NavbarOption[] = []
 
-  constructor(public dialog: MatDialog, public authService: AuthService) {
+  destroyed = new Subject<void>();
+
+  screenSizeMap = new Map([
+    [Breakpoints.XSmall, 'mobile'],
+    [Breakpoints.Small, 'desktop'],
+    [Breakpoints.Medium, 'desktop'],
+    [Breakpoints.Large, 'desktop'],
+    [Breakpoints.XLarge, 'desktop'],
+  ]);
+
+  screenSize = 'desktop'
+
+  constructor(public dialog: MatDialog, public authService: AuthService, private breakpointObserver: BreakpointObserver) {
+    breakpointObserver
+      .observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(result => {
+        for (const query of Object.keys(result.breakpoints)) {
+          if (result.breakpoints[query]) {
+            this.screenSize = this.screenSizeMap.get(query) || 'desktop'
+          }
+        }
+      });
   }
 
   ngOnInit() {
@@ -59,24 +91,11 @@ export class HeaderComponent implements OnInit {
   }
 
   openAddMovieDialog() {
-    const dialogRef = this.dialog.open(CreateMovieDialogComponent, {
-      panelClass: 'dialog-responsive',
-      data: {movieId: -1, type: MovieDialogType.CREATE}
-    });
-
-    dialogRef.afterClosed().subscribe(_ => {
-      console.log("Create Movie Dialog closed")
-    });
+    this.onAddMovieEvent.emit(true)
   }
 
   openManageUsersDialog() {
-    const dialogRef = this.dialog.open(UserManagementDialogComponent, {
-      panelClass: 'dialog-responsive'
-    });
-
-    dialogRef.afterClosed().subscribe(_ => {
-      console.log("User Management dialog was closed")
-    });
+    this.onManageUsersEvent.emit(true)
   }
 
   showLogin() {
@@ -106,6 +125,19 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout()
+  }
+
+  get showForDesktop() {
+    return this.screenSize === 'desktop'
+  }
+
+  get showForMobile() {
+    return this.screenSize === 'mobile'
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
 }

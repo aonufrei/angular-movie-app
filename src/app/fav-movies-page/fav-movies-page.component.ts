@@ -7,7 +7,7 @@ import {LikeService} from "../services/like.service";
 import {MovieService} from "../services/movie.service";
 import {Movie} from "../common/Movies";
 import {AuthService} from "../services/auth.service";
-import {SortMovieField, SortMovieOption, SortOrder} from "../common/ListOptions";
+import {SortMovieOption} from "../common/ListOptions";
 import {SELECTED_MOVIE_VIEW_FAVORITE, SELECTED_SORTING_FAVORITE} from "../common/UserPropertiesConstants";
 
 @Component({
@@ -66,7 +66,7 @@ export class FavMoviesPageComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.moviesView = this.userProperties.getMovieViewOption(SELECTED_MOVIE_VIEW_FAVORITE)
     this.sorting = this.userProperties.getSortingFromParam(SELECTED_SORTING_FAVORITE)
-    this.movieService.getMoviesObservable().subscribe(movies => {
+    this.movieService.getMoviesObservable().subscribe(_ => {
       this.onSearch(this.search)
     })
     this.authService.getUserObserver().subscribe(() => {
