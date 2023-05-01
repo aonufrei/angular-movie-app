@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NavbarOption} from "../common/NavbarOption";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateMovieDialogComponent} from "../create-movie-dialog/create-movie-dialog.component";
@@ -23,10 +23,13 @@ export class HeaderComponent implements OnInit {
     this.navOptions = options;
   }
 
+  @Input() isLightTheme = false
+
   showAddMovieBtn: boolean = this.authService.getAddMoviePermissionFor(this.user)
   showManageUsersBtn: boolean = this.authService.getManageUsersPermissionFor(this.user)
 
   @Output() navOptionChangedEvent = new EventEmitter<number>();
+  @Output() switchThemeEvent = new EventEmitter<boolean>();
 
   currentUserObserver = this.authService.getUserObserver()
 
@@ -41,6 +44,11 @@ export class HeaderComponent implements OnInit {
       this.authenticated = user.role !== GUEST_USER.role
       this.redefineButtonsPermissions()
     })
+  }
+
+  switchTheme() {
+    this.isLightTheme = !this.isLightTheme
+    this.switchThemeEvent.emit(this.isLightTheme)
   }
 
   onOptionChanged(id: number) {

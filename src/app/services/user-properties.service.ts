@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SortMovieField, SortMovieOption, SortOrder} from "../common/ListOptions";
+import {CURRENT_THEME} from "../common/UserPropertiesConstants";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class UserPropertiesService {
 
   private defaultSelectedNavOpt = 1
   private defaultSelectedMovieView = "grid"
+  private defaultTheme = true
 
   private defaultSorting: SortMovieOption = {
     field: SortMovieField.YEAR,
@@ -38,6 +40,14 @@ export class UserPropertiesService {
     return this.defaultSelectedMovieView;
   }
 
+  getThemeMode() {
+    const data = localStorage.getItem(CURRENT_THEME)
+    if (data === 'false') {
+      return false
+    }
+    return this.defaultTheme
+  }
+
   setNumberParam(optionName: string, value: number) {
     localStorage.setItem(optionName, value.toString())
   }
@@ -48,6 +58,10 @@ export class UserPropertiesService {
 
   setSortingParam(optionName: string, value: SortMovieOption) {
     localStorage.setItem(optionName, JSON.stringify(value))
+  }
+
+  setThemeMode(theme: boolean) {
+    localStorage.setItem(CURRENT_THEME, !theme ? 'false' : 'true')
   }
 
   getSortingFromParam(optionName: string): SortMovieOption {

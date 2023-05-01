@@ -11,6 +11,9 @@
   </span>
   </div>
   <div fxLayoutAlign="space-between center">
+    <button mat-icon-button color="accent" (click)="switchTheme()">
+      <mat-icon>{{isLightTheme ? 'dark_mode' : 'light_mode'}}</mat-icon>
+    </button>
     <a class="header-user-name">{{user.username}}</a>
     <button class="header-user-action" mat-icon-button color="warn" (click)="authenticated ? logout() : showLogin()">
       <mat-icon>{{authenticated ? 'logout' : 'login'}}</mat-icon>

@@ -11,6 +11,8 @@ const USER_LIST = "user_list"
 
 const MOVIE_LIST = "movie_db"
 
+const CURRENT_THEME = "current_theme" // is light mode by default
+
 export {
   SELECTED_NAVIGATION_OPTION,
   LIKED_MOVIES_BY_USERS,
@@ -20,4 +22,5 @@ export {
   SELECTED_SORTING_REGULAR,
   SELECTED_SORTING_FAVORITE,
   MOVIE_LIST,
+  CURRENT_THEME,
 }

@@ -11,12 +11,12 @@
     transition: .3s all;
 
     &:hover {
-      background-color: darkblue;
+      background-color: rgba(0, 0, 0, 0.32);
     }
   }
 
   .navbar-opt-toggled {
-    background-color: grey;
+    background-color: rgba(0, 0, 0, 0.32);
   }
 
 }

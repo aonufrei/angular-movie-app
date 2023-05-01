@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'movie-app'
 
   is404Page = false
+  isLightTheme = false
 
   favMoviesOption = createNavbarOption(2, "Favorites", '/favorites')
 
@@ -48,6 +49,11 @@ export class AppComponent implements OnInit {
     this.userProperties.setNumberParam(SELECTED_NAVIGATION_OPTION, id)
   }
 
+  onThemeChanged(isLightTheme: boolean) {
+    this.isLightTheme = isLightTheme
+    this.userProperties.setThemeMode(this.isLightTheme)
+  }
+
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -59,6 +65,8 @@ export class AppComponent implements OnInit {
         this.is404Page = currentUrl.startsWith('/404')
       }
     })
+
+    this.isLightTheme = this.userProperties.getThemeMode()
 
     this.selectNavOption(this.userProperties.getNumberFromParam(SELECTED_NAVIGATION_OPTION))
   }
