@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Renderer2} from '@angular/core';
 import {createNavbarOption, NavbarOption} from "./common/NavbarOption";
 import {NavigationEnd, Router} from "@angular/router";
 import {UserPropertiesService} from "./services/user-properties.service";
 import {SELECTED_NAVIGATION_OPTION} from "./common/UserPropertiesConstants";
 import {AuthService} from "./services/auth.service";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit {
 
   showAddMovieBtn: boolean = false
 
-  constructor(private router: Router, private authService: AuthService, private userProperties: UserPropertiesService) {
+  constructor(private router: Router, private authService: AuthService, private userProperties: UserPropertiesService,
+              @Inject(DOCUMENT) private document: Document, private renderer: Renderer2) {
     this.navOptions = [
       createNavbarOption(1, "Movies", '/movies'),
       // createNavbarOption(2, "Favorites", '/favorites'),
@@ -52,9 +54,11 @@ export class AppComponent implements OnInit {
   onThemeChanged(isLightTheme: boolean) {
     this.isLightTheme = isLightTheme
     this.userProperties.setThemeMode(this.isLightTheme)
+    this.renderer.setAttribute(this.document.body, 'class', this.isLightTheme ? 'lightMode' : 'darkMode')
   }
 
   ngOnInit(): void {
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.urlAfterRedirects
@@ -67,6 +71,7 @@ export class AppComponent implements OnInit {
     })
 
     this.isLightTheme = this.userProperties.getThemeMode()
+    this.renderer.setAttribute(this.document.body, 'class', this.isLightTheme ? 'lightMode' : 'darkMode')
 
     this.selectNavOption(this.userProperties.getNumberFromParam(SELECTED_NAVIGATION_OPTION))
   }

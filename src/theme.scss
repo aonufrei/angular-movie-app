@@ -1,0 +1,104 @@
+@import '@angular/material/theming';
+
+@include mat-core();
+
+$primary-dark-colors: (
+  50: #e0f7fa,
+  100: #b2ebf2,
+  200: #80deea,
+  300: #4dd0e1,
+  400: #26c6da,
+  500: #00bcd4,
+  600: #00acc1,
+  700: #0097a7,
+  800: #00838f,
+  900: #006064,
+  A100: #84ffff,
+  A200: #18ffff,
+  A400: #00e5ff,
+  A700: #00b8d4,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #ffffff,
+  )
+);
+
+$primary-dark: mat-palette($primary-dark-colors);
+
+$primary: mat-palette($mat-indigo);
+$accent: mat-palette($mat-pink);
+$warn: mat-palette($mat-red);
+
+$light-theme: mat-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    light: white,
+  )
+));
+
+
+$dark-theme: mat-dark-theme((
+  color: (
+    primary: $primary-dark,
+    accent: $accent,
+    warn: $warn,
+    light: white,
+  )
+));
+
+//@include angular-material-theme($dark-theme);
+.lightMode {
+  @include angular-material-theme($light-theme);
+
+  .light-icon-btn {
+    color: white;
+  }
+
+  .header {
+    background-color: mat-color($primary);
+    color: white;
+  }
+
+  .label-color {
+    color: black;
+  }
+
+  .movie-card-bcg {
+    background-color: white;
+  }
+}
+
+.darkMode {
+  @include angular-material-theme($dark-theme);
+
+  background-color: #131313;
+
+  .light-icon-btn {
+    color: white;
+  }
+  .header {
+    background-color: #212121;
+  }
+  .label-color {
+    color: white;
+  }
+
+  .movie-card-bcg {
+    background-color: #212121;
+  }
+
+}

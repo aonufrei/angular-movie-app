@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" fxLayoutAlign="space-between center">
+<mat-toolbar class="header" fxLayoutAlign="space-between center">
   <div fxLayoutAlign="start center">
   <span>Movie App</span>
   <nav class="navbar">
@@ -11,7 +11,7 @@
   </span>
   </div>
   <div fxLayoutAlign="space-between center">
-    <button mat-icon-button color="accent" (click)="switchTheme()">
+    <button mat-icon-button color="light" (click)="switchTheme()">
       <mat-icon>{{isLightTheme ? 'dark_mode' : 'light_mode'}}</mat-icon>
     </button>
     <a class="header-user-name">{{user.username}}</a>

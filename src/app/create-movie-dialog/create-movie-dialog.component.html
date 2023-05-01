@@ -1,6 +1,6 @@
 <mat-card class="dialog-container">
 
-  <h3 class="dialog-title">Create Movie Form</h3>
+  <h3 class="dialog-title label-color">Create Movie Form</h3>
 
   <form fxLayout="column" fxFill
         [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -28,7 +28,7 @@
 
     <div fxLayout="row"
          fxLayoutAlign="space-between center" fxFill>
-      <button mat-raised-button type="button" (click)="onCloseClicked()">Close</button>
+      <button mat-raised-button type="button" color="accent" (click)="onCloseClicked()">Close</button>
       <button mat-raised-button color="primary" type="submit"
               [disabled]="form.invalid" (click)="onCloseClicked()">{{getSubmitBtnText(dialogType)}}
       </button>

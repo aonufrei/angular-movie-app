@@ -7,11 +7,11 @@
   .movie-card {
     height: 100%;
     width: 350px;
-    background-color: aquamarine;
+    margin-bottom: 10px;
+    border: 1px solid rgba(33, 33, 33, 0.24);
 
     .image-bearer {
       position: relative;
-      height: 400px;
       background-size: auto 100%;
       background-repeat: no-repeat;
       background-position: center;
@@ -47,7 +47,6 @@
   .movie-list-card-item {
     height: 100%;
     width: 100%;
-    background-color: aquamarine;
 
     .image-bearer {
       width: 300px;

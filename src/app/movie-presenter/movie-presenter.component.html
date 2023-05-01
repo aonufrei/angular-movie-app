@@ -39,10 +39,10 @@
 <div class="grid-container">
   <mat-grid-list [cols]="columnAmount" rowHeight="500px" gutterSize="10px" *ngIf="!isListView()">
     <mat-grid-tile *ngFor="let m of sortedMovies">
-      <mat-card fxLayout="column" class="movie-card">
-        <div fxFlex="75%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"
+      <mat-card fxLayout="column" class="movie-card movie-card-bcg">
+        <div fxFlex="65%" class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"
              fxLayoutAlign="end start">
-          <button class="delete-movie-btn" *ngIf="showEdit" mat-icon-button color="primary"
+          <button class="delete-movie-btn light-icon-btn" *ngIf="showEdit" mat-icon-button
                   [matMenuTriggerFor]="menu">
             <mat-icon>tune</mat-icon>
           </button>
@@ -53,17 +53,17 @@
         </div>
         <div fxFlex="25%" fxLayout="column" fxLayoutAlign="space-between" class="movie-card-info">
           <div>
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-              <span class="movie-card-title">{{m.name}}</span>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <span class="movie-card-title label-color">{{m.name}}</span>
               <button *ngIf="showMark" mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
                 <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
               </button>
             </div>
-            <span class="movie-card-year">{{m.year}}</span>
+            <span class="movie-card-year label-color">{{m.year}}</span>
           </div>
           <div fxLayoutAlign="space-between" fxLayout="center">
-            <span class="movie-card-income">{{m.income | income }} $</span>
-            <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
+            <span class="movie-card-income label-color">{{m.income | income }} $</span>
+            <span class="movie-card-createdAt label-color">{{m.createdAt | date : "mediumDate"}}</span>
           </div>
         </div>
       </mat-card>
@@ -72,13 +72,13 @@
 
   <mat-grid-list cols="1" rowHeight="300px" gutterSize="5px" *ngIf="isListView()">
     <mat-grid-tile *ngFor="let m of sortedMovies">
-      <mat-card fxLayout="row" class="movie-list-card-item">
+      <mat-card fxLayout="row" class="movie-list-card-item movie-card-bcg">
         <div class="image-bearer" [style.background-image]="'url(' + m.picture + ')'"></div>
         <div class="movie-list-card-information" fxLayout="column" fxFlexAlign="space-between" [style.width]="'100%'"
              [style.height]="'100%'">
           <div fxFlex="30%">
             <div fxLayoutAlign="space-between center">
-              <span class="movie-card-title">{{m.name}}</span>
+              <span class="movie-card-title label-color">{{m.name}}</span>
               <div>
                 <button *ngIf="showMark" mat-icon-button color="primary" (click)="onMovieMadeFavorite(m.id)">
                   <mat-icon>{{m.favorite ? 'bookmark' : 'bookmark_border'}}</mat-icon>
@@ -93,12 +93,12 @@
                 </mat-menu>
               </div>
             </div>
-            <span class="movie-card-year">{{m.year}}</span>
-            <span class="movie-card-income">{{m.income | income }}</span>
+            <span class="movie-card-year label-color">{{m.year}}</span>
+            <span class="movie-card-income label-color">{{m.income | income }}</span>
           </div>
           <div fxFlex="70%" fxLayout="row" fxLayoutAlign="end end">
             <div fxLayoutAlign="space-around center">
-              <span class="movie-card-createdAt">{{m.createdAt | date : "mediumDate"}}</span>
+              <span class="movie-card-createdAt label-color">{{m.createdAt | date : "mediumDate"}}</span>
             </div>
           </div>
         </div>
