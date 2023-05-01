@@ -64,6 +64,10 @@ export class CreateMovieDialogComponent implements OnInit {
     }
   }
 
+  onFileLoaded(fileUrl: string) {
+    this.form.patchValue({ picture: fileUrl })
+  }
+
   createMovie() {
     const movie = this.movieService.buildMovie(this.movieFromForm())
     this.movieService.addMovie(movie)
@@ -87,6 +91,11 @@ export class CreateMovieDialogComponent implements OnInit {
 
   get title() {
     return this.form.get('title');
+  }
+
+  get pictureHasErrors() {
+    console.log(this.picture?.errors)
+    return !!this.picture?.errors
   }
 
   get picture() {

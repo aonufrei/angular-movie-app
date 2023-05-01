@@ -10,10 +10,12 @@
       <input matInput formControlName="title"/>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" floatLabel="auto">
-      <mat-label>Poster</mat-label>
-      <input matInput formControlName="picture"/>
-    </mat-form-field>
+    <app-upload-file-input [isValid]="!pictureHasErrors" (loadFileEvent)="onFileLoaded($event)"></app-upload-file-input>
+
+<!--    <mat-form-field appearance="fill" floatLabel="auto">-->
+<!--      <mat-label>Poster</mat-label>-->
+<!--      <input matInput formControlName="picture"/>-->
+<!--    </mat-form-field>-->
 
     <mat-form-field appearance="fill" floatLabel="auto">
       <mat-label>Income</mat-label>

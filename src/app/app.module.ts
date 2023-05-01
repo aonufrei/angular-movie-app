@@ -34,6 +34,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {UserManagementDialogComponent} from './user-manager-dialog/user-management-dialog.component';
 import {MatTableModule} from "@angular/material/table";
 import { NoAccessPageComponent } from './no-access-page/no-access-page.component';
+import { UploadFileInputComponent } from './upload-file-input/upload-file-input.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NoAccessPageComponent } from './no-access-page/no-access-page.component
     PageNotFoundComponent,
     UserManagementDialogComponent,
     NoAccessPageComponent,
+    UploadFileInputComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+<div [ngClass]="{'upload-file-container file-input-bcg': true, 'invalid-input' : !isValid, 'file-input': isValid}">
+  <input class="upload-file-input" id="file-input" type="file" (change)="loadFile($event)">
+  <div class="upload-file-btn clickable">
+    <label for="file-input" fxLayout="row" fxLayoutAlign="center center" class="clickable label-color">
+      <mat-icon [ngClass]="{'invalid-input' : !isValid, 'file-input': isValid}">upload_file</mat-icon>
+      <span
+        [ngClass]="{'invalid-input' : !isValid, 'file-input': isValid}">
+        {{uploadedFilename === undefined ? 'Choose file*' : 'Uploaded file*: ' + uploadedFilename}}
+      </span>
+    </label>
+  </div>
+
+</div>

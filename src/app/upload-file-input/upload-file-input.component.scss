@@ -1,0 +1,23 @@
+.upload-file-container {
+  margin-bottom: 20px;
+  border-radius: 5px 5px 0 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+
+  &:hover {
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+.upload-file-input {
+  display: none;
+}
+
+.upload-file-btn {
+  //background-color: white;
+  padding: 10px 20px;
+}
+
+.clickable {
+  cursor: pointer;
+}

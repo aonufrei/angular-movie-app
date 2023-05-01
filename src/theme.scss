@@ -62,6 +62,7 @@ $dark-theme: mat-dark-theme((
 
 //@include angular-material-theme($dark-theme);
 .lightMode {
+
   @include angular-material-theme($light-theme);
 
   .light-icon-btn {
@@ -80,6 +81,23 @@ $dark-theme: mat-dark-theme((
   .movie-card-bcg {
     background-color: white;
   }
+
+  .file-input-bcg {
+    background-color: #f5f5f5;
+    :hover {
+      background-color: #ececec;
+    }
+  }
+
+  .invalid-input {
+    border-bottom: mat-color($warn);
+    color: mat-color($warn);
+  }
+
+  .file-input {
+    border-color: #898989;
+  }
+
 }
 
 .darkMode {
@@ -90,9 +108,11 @@ $dark-theme: mat-dark-theme((
   .light-icon-btn {
     color: white;
   }
+
   .header {
     background-color: #212121;
   }
+
   .label-color {
     color: white;
   }
@@ -101,4 +121,21 @@ $dark-theme: mat-dark-theme((
     background-color: #212121;
   }
 
+
+  .file-input {
+    background-color: #4A4A4A;
+
+    :hover {
+      background-color: #575757;
+    }
+  }
+
+  .invalid-input {
+    border-bottom: mat-color($warn);
+    color: mat-color($warn);
+  }
+
+  .file-input {
+    border-color: #898989;
+  }
 }
