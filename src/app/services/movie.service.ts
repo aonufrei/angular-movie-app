@@ -68,8 +68,10 @@ export class MovieService {
   }
 
   getMovies() {
-    // TODO: Use LocalStorage
-    return [...this.movieDB]
+    const existingIds = this.movieDB.map(m => m.id)
+    const movies = this.retrieveMoviesFromStorage()
+      .filter(m => !existingIds.includes(m.id))
+    return [...this.movieDB, ...movies]
   }
 
   addMovie(movie: Movie) {
