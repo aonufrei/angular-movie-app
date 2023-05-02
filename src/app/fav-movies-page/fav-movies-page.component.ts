@@ -36,8 +36,8 @@ export class FavMoviesPageComponent implements OnInit, OnDestroy{
     [Breakpoints.XSmall, 1],
     [Breakpoints.Small, 2],
     [Breakpoints.Medium, 4],
-    [Breakpoints.Large, 5],
-    [Breakpoints.XLarge, 6],
+    [Breakpoints.Large, 4],
+    [Breakpoints.XLarge, 5],
   ]);
 
   constructor(public userProperties: UserPropertiesService,

@@ -7,7 +7,7 @@
 
 <div [style.height]="'100px'"></div>
 
-<div class="fab-btn-container" fxLayout="column">
+<div *ngIf="showActionBtns" class="fab-btn-container" fxLayout="column">
   <button mat-fab color="primary" *ngIf="showManageUsersBtn" class="fab-btn" [style.margin-bottom]="'18px'"
           (click)="openManageUsersDialog()">
     <mat-icon>group</mat-icon>

@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
   is404Page = false
   isLightTheme = false
 
+  showActionBtns = false
+
   favMoviesOption = createNavbarOption(2, "Favorites", '/favorites')
 
   navOptions: NavbarOption[]
@@ -99,6 +101,7 @@ export class AppComponent implements OnInit {
           this.selectNavOption(navOpt[0].id)
         }
         this.is404Page = currentUrl.startsWith('/404')
+        this.showActionBtns = !(['/404', '/no-access'].map(link => currentUrl.startsWith(link)).includes(true))
       }
     })
 
