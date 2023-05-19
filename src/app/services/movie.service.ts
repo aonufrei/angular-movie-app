@@ -127,7 +127,16 @@ export class MovieService {
     const data = localStorage.getItem(MOVIE_LIST)
     try {
       if (data) {
-        return JSON.parse(data)
+        let m : any[] = JSON.parse(data)
+        m = m.map(it => {
+          let date : Date = new Date()
+          if (it.createdAt === 'string') {
+            date =  new Date(it.createdAt)
+          }
+          return {...it, createdAt: date}
+        })
+
+        return [...m]
       }
     } catch (e) {
       console.log("Failed to load list of movies from local storage")

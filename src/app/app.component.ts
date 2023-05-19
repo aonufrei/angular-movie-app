@@ -9,6 +9,7 @@ import {CreateMovieDialogComponent} from "./create-movie-dialog/create-movie-dia
 import {MovieDialogType} from "./common/MovieDialogData";
 import {UserManagementDialogComponent} from "./user-manager-dialog/user-management-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {UserRole} from "./common/User";
 
 @Component({
   selector: 'app-root',
@@ -51,6 +52,9 @@ export class AppComponent implements OnInit {
 
       this.showAddMovieBtn = this.authService.getAddMoviePermissionFor(u)
       this.showManageUsersBtn = this.authService.getManageUsersPermissionFor(u)
+
+      const currentUserRole = this.authService.currentUser.role
+      this.showActionBtns = !(currentUserRole === UserRole.REGULAR || currentUserRole === UserRole.GUEST)
     })
   }
 
@@ -102,6 +106,10 @@ export class AppComponent implements OnInit {
         }
         this.is404Page = currentUrl.startsWith('/404')
         this.showActionBtns = !(['/404', '/no-access'].map(link => currentUrl.startsWith(link)).includes(true))
+        const currentUserRole = this.authService.currentUser.role
+        if (currentUserRole === UserRole.REGULAR || currentUserRole === UserRole.GUEST) {
+          this.showActionBtns = false;
+        }
       }
     })
 
